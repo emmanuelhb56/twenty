@@ -13,7 +13,7 @@ export const WORKFLOW_DIAGRAM_EMPTY_NODE_DEFINITION = {
   data: {
     nodeType: 'action',
     actionType: 'EMPTY',
-    name: 'Add an Action',
+    name: 'Agregar acción',
     hasNextStepIds: false,
     stepId: EMPTY_NODE_ID,
     position: {

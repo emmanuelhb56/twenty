@@ -17,6 +17,7 @@ import { isDefined } from 'twenty-shared/utils';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 
 const StyledTitleWithSelectedRecords = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
   gap: ${themeCssVariables.spacing[1]};
@@ -53,7 +54,6 @@ export const RecordIndexPageHeader = () => {
     contextStoreNumberOfSelectedRecords > 0 ? (
       <StyledTitleWithSelectedRecords>
         <StyledTitle>{label}</StyledTitle>
-        <>{'->'}</>
         <StyledSelectedRecordsCount>
           {t`${formatNumber(contextStoreNumberOfSelectedRecords)} selected`}
         </StyledSelectedRecordsCount>

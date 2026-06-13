@@ -5,7 +5,7 @@ export const DELAY_ACTION: {
   type: Extract<WorkflowActionType, 'DELAY'>;
   icon: string;
 } = {
-  defaultLabel: 'Delay',
+  defaultLabel: 'Retraso',
   type: 'DELAY',
   icon: 'IconPlayerPause',
 };

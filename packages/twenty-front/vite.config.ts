@@ -68,6 +68,13 @@ export default defineConfig(({ mode }) => {
           '**/@blocknote/core/src/fonts/**',
         ],
       },
+      proxy: {
+        '/graphql': { target: 'http://localhost:3000', changeOrigin: true },
+        '/metadata': { target: 'http://localhost:3000', changeOrigin: true },
+        '/auth': { target: 'http://localhost:3000', changeOrigin: true },
+        '/files': { target: 'http://localhost:3000', changeOrigin: true },
+        '/healthz': { target: 'http://localhost:3000', changeOrigin: true },
+      },
     },
 
     plugins: [

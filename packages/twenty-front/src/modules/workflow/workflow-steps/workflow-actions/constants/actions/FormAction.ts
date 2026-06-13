@@ -5,7 +5,7 @@ export const FORM_ACTION: {
   type: Extract<WorkflowActionType, 'FORM'>;
   icon: string;
 } = {
-  defaultLabel: 'Form',
+  defaultLabel: 'Formulario',
   type: 'FORM',
   icon: 'IconForms',
 };

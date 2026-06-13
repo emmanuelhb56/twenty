@@ -1,0 +1,422 @@
+/* =============================================================
+   Twenty CRM — ClickBalance Brand Overrides (shadcn/ui style)
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ─── VARIABLES DE TEMA (light) ─────────────────────────────── */
+
+.light {
+  /* Backgrounds — zinc scale */
+  --t-background-primary:            #ffffff;
+  --t-background-secondary:          #fafafa;
+  --t-background-tertiary:           #f4f4f5;
+  --t-background-quaternary:         #e4e4e7;
+
+  /* Accent / Brand — verde ClickBalance */
+  --t-accent-primary:                #4ade80;
+  --t-accent-secondary:              #22c55e;
+  --t-accent-tertiary:               #dcfce7;
+  --t-accent-quaternary:             #f0fdf4;
+
+  /* Borders — zinc-200 / zinc-300 */
+  --t-border-color-light:            #f4f4f5;
+  --t-border-color-medium:           #e4e4e7;
+  --t-border-color-strong:           #d4d4d8;
+
+  /* Texto — zinc scale */
+  --t-font-color-primary:            #09090b;
+  --t-font-color-secondary:          #3f3f46;
+  --t-font-color-tertiary:           #71717a;
+  --t-font-color-light:              #71717a;
+
+  /* Buttons */
+  --t-buttons-primary-background-color:       #22c55e;
+  --t-buttons-primary-background-hover-color: #16a34a;
+  --t-buttons-primary-text-color:             #ffffff;
+  --t-buttons-secondary-text-color:           #22c55e;
+
+  /* Botones primarios (accent=blue) → verde */
+  --t-color-blue:            #22c55e;
+  --t-color-blue10:          #16a34a;
+  --t-color-blue12:          #14532d;
+  --t-border-color-blue:     #ffffff;
+
+  /* Tooltips → verde oscuro */
+  --t-color-transparent-gray11: rgba(9, 9, 11, 0.92);
+}
+
+/* ─── VARIABLES DE TEMA (dark) ──────────────────────────────── */
+
+.dark {
+  --t-background-primary:            #09090b;
+  --t-background-secondary:          #18181b;
+  --t-background-tertiary:           #27272a;
+  --t-background-quaternary:         #3f3f46;
+
+  --t-accent-primary:                #22c55e;
+  --t-accent-secondary:              #16a34a;
+  --t-accent-tertiary:               rgba(34, 197, 94, 0.12);
+  --t-accent-quaternary:             rgba(34, 197, 94, 0.06);
+
+  --t-border-color-light:            #27272a;
+  --t-border-color-medium:           #3f3f46;
+  --t-border-color-strong:           #52525b;
+
+  --t-font-color-primary:            #fafafa;
+  --t-font-color-secondary:          #d4d4d8;
+  --t-font-color-tertiary:           #a1a1aa;
+  --t-font-color-light:              #71717a;
+
+  --t-buttons-primary-background-color:       #22c55e;
+  --t-buttons-primary-background-hover-color: #16a34a;
+  --t-buttons-primary-text-color:             #ffffff;
+  --t-buttons-secondary-text-color:           #4ade80;
+
+  --t-color-blue:            #22c55e;
+  --t-color-blue10:          #16a34a;
+  --t-color-blue12:          #14532d;
+  --t-border-color-blue:     #ffffff;
+
+  --t-color-transparent-gray11: rgba(250, 250, 250, 0.92);
+}
+
+/* ─── TIPOGRAFÍA GLOBAL ──────────────────────────────────────── */
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  letter-spacing: -0.011em;
+  line-height: 1.5;
+}
+
+/* ─── HOVER TEXT OVERLAP en campos seleccionables ───────────────── */
+
+[role="option"],
+[role="option"] > * {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ─── BOTONES — shadcn style ─────────────────────────────────── */
+
+button {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+button:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #22c55e !important;
+}
+
+/* ─── INPUTS — shadcn style ─────────────────────────────────── */
+
+input,
+textarea,
+select {
+  border-radius: 6px !important;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px rgba(34, 197, 94, 0.5) !important;
+  border-color: #22c55e !important;
+}
+
+/* ─── CARDS / PANELS — sombra sutil shadcn ───────────────────── */
+
+.light [class*="RightDrawer"],
+.light [class*="Panel"],
+.light [class*="Card"],
+.light [class*="card"] {
+  border: 1px solid #e4e4e7;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.04), 0 1px 2px -1px rgba(0,0,0,0.04);
+}
+
+/* ─── DROPDOWN / MENÚ POPOVER ────────────────────────────────── */
+
+[class*="Dropdown"],
+[class*="dropdown"] {
+  border-radius: 8px !important;
+  border: 1px solid #e4e4e7 !important;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06),
+              0 2px 4px -2px rgba(0,0,0,0.04),
+              0 0 0 1px rgba(0,0,0,0.02) !important;
+}
+
+.dark [class*="Dropdown"],
+.dark [class*="dropdown"] {
+  border-color: #3f3f46 !important;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3),
+              0 2px 4px -2px rgba(0,0,0,0.2) !important;
+}
+
+/* ─── MODAL / DIALOG ─────────────────────────────────────────── */
+
+[class*="Modal"],
+[class*="modal"],
+[class*="Dialog"],
+[class*="dialog"] {
+  border-radius: 10px !important;
+  border: 1px solid #e4e4e7 !important;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08),
+              0 8px 10px -6px rgba(0,0,0,0.05) !important;
+}
+
+.dark [class*="Modal"],
+.dark [class*="Dialog"] {
+  border-color: #3f3f46 !important;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5),
+              0 8px 10px -6px rgba(0,0,0,0.3) !important;
+}
+
+/* ─── CHIPS / BADGES ─────────────────────────────────────────── */
+
+[class*="Chip"],
+[class*="chip"],
+[class*="Tag"],
+[class*="tag"],
+[class*="Badge"],
+[class*="badge"] {
+  border-radius: 4px !important;
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
+
+/* ─── TABLA — Encabezados ────────────────────────────────────── */
+
+.header-cell {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #71717a !important;
+  background-color: #fafafa !important;
+  border-bottom: 1px solid #e4e4e7 !important;
+}
+
+.dark .header-cell {
+  background-color: #18181b !important;
+  color: #71717a !important;
+  border-bottom-color: #3f3f46 !important;
+}
+
+/* ─── TABLA — Filas ──────────────────────────────────────────── */
+
+.table-row {
+  border-bottom: 1px solid #f4f4f5;
+  transition: background-color 0.1s;
+}
+
+.table-row:hover .table-cell {
+  background-color: #fafafa !important;
+}
+
+.dark .table-row {
+  border-bottom-color: #27272a;
+}
+
+.dark .table-row:hover .table-cell {
+  background-color: rgba(255,255,255,0.03) !important;
+}
+
+/* ─── SIDEBAR NAV — hover state más limpio ───────────────────── */
+
+.light [class*="NavigationDrawerItem"]:hover,
+.light [class*="NavItem"]:hover {
+  background-color: #f4f4f5 !important;
+  border-radius: 6px;
+}
+
+/* ─── AVATAR VACÍO ───────────────────────────────────────────── */
+
+[class*="StyledPageInfoIcon"] {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* ─── SCROLLBARS ─────────────────────────────────────────────── */
+
+::-webkit-scrollbar        { width: 5px; height: 5px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: #d4d4d8; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+
+.dark ::-webkit-scrollbar-thumb  { background: #3f3f46; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+/* ─── SELECCIÓN DE TEXTO ─────────────────────────────────────── */
+
+::selection {
+  background-color: #dcfce7;
+  color: #14532d;
+}
+
+.dark ::selection {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+/* ─── ANIMACIONES ────────────────────────────────────────────── */
+
+/* Entrada suave de dropdowns / popovers */
+@keyframes cb-fade-in-down {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+@keyframes cb-fade-in-up {
+  from { opacity: 0; transform: translateY(4px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+@keyframes cb-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+[class*="Dropdown"],
+[class*="dropdown"],
+[class*="Popover"],
+[class*="popover"],
+[class*="ContextMenu"],
+[class*="contextmenu"] {
+  animation: cb-fade-in-down 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transform-origin: top center;
+}
+
+/* Modal entrada */
+[class*="Modal"],
+[class*="Dialog"] {
+  animation: cb-fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Botones primarios — lift on hover */
+button[class*="primary"],
+button[class*="Primary"] {
+  transition: background-color 0.15s, transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s !important;
+}
+button[class*="primary"]:hover:not(:disabled),
+button[class*="Primary"]:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3) !important;
+}
+button[class*="primary"]:active,
+button[class*="Primary"]:active {
+  transform: translateY(0);
+}
+
+/* Todos los botones — micro-bounce on click */
+button:active:not(:disabled) {
+  transform: scale(0.97) !important;
+  transition: transform 0.08s ease !important;
+}
+
+/* Filas de tabla — slide + accent bar on hover */
+.table-row {
+  transition: background-color 0.12s ease !important;
+  position: relative;
+}
+.table-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: #22c55e;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 0 2px 2px 0;
+}
+.table-row:hover::before {
+  transform: scaleY(1);
+}
+
+/* Nav items — slide suave */
+[class*="NavigationDrawerItem"],
+[class*="NavItem"],
+[class*="SidebarItem"] {
+  transition: background-color 0.12s ease, transform 0.12s ease, padding-left 0.12s ease !important;
+}
+[class*="NavigationDrawerItem"]:hover,
+[class*="NavItem"]:hover,
+[class*="SidebarItem"]:hover {
+  transform: translateX(2px);
+}
+
+/* Chips / badges — pop on hover */
+[class*="Chip"]:not([class*="disabled"]),
+[class*="Tag"]:not([class*="disabled"]),
+[class*="Badge"]:not([class*="disabled"]) {
+  transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s ease !important;
+}
+[class*="Chip"]:hover,
+[class*="Tag"]:hover,
+[class*="Badge"]:hover {
+  transform: scale(1.05);
+}
+
+/* Iconos en botones — micro-rotate on hover */
+button:hover svg {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+button:hover [class*="IconPlus"] svg,
+button:hover [class*="plus"] svg {
+  transform: rotate(90deg);
+}
+
+/* Cards / paneles — shadow lift */
+[class*="Card"],
+[class*="card"],
+[class*="Panel"] {
+  transition: box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+[class*="Card"]:hover,
+[class*="card"]:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04) !important;
+  transform: translateY(-1px);
+}
+
+/* Input focus — smooth ring appear */
+input,
+textarea,
+select {
+  transition: box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s ease !important;
+}
+
+/* Sidebar icon — scale on hover */
+[class*="NavigationDrawerItem"] svg,
+[class*="NavItem"] svg {
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+[class*="NavigationDrawerItem"]:hover svg,
+[class*="NavItem"]:hover svg {
+  transform: scale(1.15);
+}
+
+/* Botón verde (accent blue) — glow sutil */
+button[style*="--abtn-bg: var(--t-color-blue)"],
+button[style*="--abtn-bg:var(--t-color-blue)"] {
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  transition: box-shadow 0.2s ease, background 0.15s, transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+button[style*="--abtn-bg: var(--t-color-blue)"]:hover,
+button[style*="--abtn-bg:var(--t-color-blue)"]:hover {
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25) !important;
+  transform: translateY(-1px);
+}

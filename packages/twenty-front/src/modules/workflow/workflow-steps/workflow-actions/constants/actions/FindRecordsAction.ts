@@ -5,7 +5,7 @@ export const FIND_RECORDS_ACTION: {
   type: Extract<WorkflowActionType, 'FIND_RECORDS'>;
   icon: string;
 } = {
-  defaultLabel: 'Search Records',
+  defaultLabel: 'Buscar registros',
   type: 'FIND_RECORDS',
   icon: 'IconSearch',
 };

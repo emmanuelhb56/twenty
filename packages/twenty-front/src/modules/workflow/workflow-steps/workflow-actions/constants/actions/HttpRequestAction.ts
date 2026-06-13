@@ -5,7 +5,7 @@ export const HTTP_REQUEST_ACTION: {
   type: Extract<WorkflowActionType, 'HTTP_REQUEST'>;
   icon: string;
 } = {
-  defaultLabel: 'HTTP Request',
+  defaultLabel: 'Petición HTTP',
   type: 'HTTP_REQUEST',
   icon: 'IconWorld',
 };

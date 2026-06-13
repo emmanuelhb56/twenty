@@ -5,7 +5,7 @@ export const UPSERT_RECORD_ACTION: {
   type: Extract<WorkflowActionType, 'UPSERT_RECORD'>;
   icon: string;
 } = {
-  defaultLabel: 'Create or Update Record',
+  defaultLabel: 'Crear o actualizar registro',
   type: 'UPSERT_RECORD',
   icon: 'IconPencilPlus',
 };

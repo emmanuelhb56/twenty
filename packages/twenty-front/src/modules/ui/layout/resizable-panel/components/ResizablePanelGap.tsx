@@ -17,6 +17,27 @@ const StyledGap = styled.div<{ gapWidth: number }>`
   transition: width 0.15s ease;
   width: ${({ gapWidth }) => gapWidth}px;
   z-index: 1;
+
+  &::after {
+    background-color: var(--t-border-color-strong);
+    border-radius: 3px;
+    content: '';
+    height: 40px;
+    left: 50%;
+    opacity: 0.75;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.15s, opacity 0.15s, height 0.15s, width 0.15s;
+    width: 4px;
+  }
+
+  &:hover::after {
+    background-color: var(--t-accent-primary);
+    height: 64px;
+    opacity: 1;
+    width: 5px;
+  }
 `;
 
 type ResizablePanelGapProps = {

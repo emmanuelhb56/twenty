@@ -6,7 +6,6 @@ import { COMMAND_MENU_SIDE_PANEL_PAGES } from '@/side-panel/constants/CommandMen
 import { SIDE_PANEL_TOP_BAR_HEIGHT } from '@/side-panel/constants/SidePanelTopBarHeight';
 import { SIDE_PANEL_TOP_BAR_HEIGHT_MOBILE } from '@/side-panel/constants/SidePanelTopBarHeightMobile';
 import { SIDE_PANEL_FOCUS_ID } from '@/side-panel/constants/SidePanelFocusId';
-import { useSidePanelMenu } from '@/side-panel/hooks/useSidePanelMenu';
 import { useSidePanelContextChips } from '@/side-panel/hooks/useSidePanelContextChips';
 import { sidePanelNavigationStackState } from '@/side-panel/states/sidePanelNavigationStackState';
 import { sidePanelPageState } from '@/side-panel/states/sidePanelPageState';
@@ -94,8 +93,6 @@ export const SidePanelTopBar = () => {
   };
 
   const isMobile = useIsMobile();
-
-  const { closeSidePanelMenu } = useSidePanelMenu();
 
   const sidePanelPage = useAtomStateValue(sidePanelPageState);
 

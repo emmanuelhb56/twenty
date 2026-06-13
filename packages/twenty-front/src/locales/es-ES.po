@@ -829,7 +829,7 @@ msgstr ""
 #. js-lingui-id: LuXP9q
 #: src/pages/settings/applications/tabs/SettingsApplicationsDeveloperTab.tsx
 msgid "Access"
-msgstr ""
+msgstr "Acceso"
 
 #. js-lingui-id: pNW+Rt
 #: src/pages/settings/admin-panel/SettingsAdminNewAiProvider.tsx
@@ -1488,7 +1488,7 @@ msgstr "Ejecución del agente"
 #. js-lingui-id: WrQ+BN
 #: src/pages/settings/ai/components/SettingsAgentLogsTab.tsx
 msgid "Agent interactions will appear here once the agent is used in conversations"
-msgstr ""
+msgstr "Las interacciones del agente aparecerán aquí una vez que se use en conversaciones"
 
 #. js-lingui-id: mDXkHu
 #: src/pages/settings/ai/SettingsAgentForm.tsx
@@ -1509,7 +1509,7 @@ msgstr "Tokens del agente"
 #: src/pages/settings/applications/SettingsAvailableApplicationDetails.tsx
 #: src/pages/settings/applications/SettingsApplicationDetails.tsx
 msgid "agents"
-msgstr ""
+msgstr "agentes"
 
 #. js-lingui-id: 8Uv5e6
 #: src/pages/settings/applications/tabs/SettingsApplicationDetailContentTab.tsx
@@ -1521,7 +1521,7 @@ msgstr "Agentes"
 #: src/modules/side-panel/pages/page-layout/constants/GraphTypeInformation.ts
 #: src/modules/page-layout/utils/getWidgetTitle.ts
 msgid "Aggregate Chart"
-msgstr ""
+msgstr "Gráfico de agregado"
 
 #. js-lingui-id: jsQZMk
 #: src/pages/settings/members/roles/SettingsRoleAddObjectLevel.tsx
@@ -1722,7 +1722,7 @@ msgstr "Todos los campos"
 #. js-lingui-id: Ynglvj
 #: src/modules/object-record/record-table/record-table-header/components/RecordTableHeaderPlusButtonContent.tsx
 msgid "All fields are already visible"
-msgstr ""
+msgstr "Todos los campos ya son visibles"
 
 #. js-lingui-id: BKoJRa
 #: src/modules/settings/admin-panel/config-variables/components/SettingsAdminConfigVariables.tsx
@@ -1747,7 +1747,7 @@ msgstr "Todos los metadatos"
 #. js-lingui-id: zIk4M6
 #: src/modules/side-panel/components/SidePanelObjectFilterDropdownContent.tsx
 msgid "All objects"
-msgstr ""
+msgstr "Todos los objetos"
 
 #. js-lingui-id: aFE/OW
 #: src/pages/settings/security/event-logs/components/EventLogFilters.tsx
@@ -2144,7 +2144,7 @@ msgstr "Aplicación"
 #. js-lingui-id: qKnSyT
 #: src/pages/settings/admin-panel/SettingsAdminApplicationRegistrationDangerZone.tsx
 msgid "App deleted successfully"
-msgstr ""
+msgstr "Aplicación eliminada correctamente"
 
 #. js-lingui-id: aAIQg2
 #: src/pages/settings/profile/appearance/components/SettingsExperience.tsx
@@ -2274,7 +2274,7 @@ msgstr "Árabe"
 #. js-lingui-id: B495Gs
 #: src/modules/ai/components/AiChatThreadItemMenu.tsx
 msgid "Archive"
-msgstr ""
+msgstr "Archivar"
 
 #. js-lingui-id: i19Zro
 #: src/modules/activities/files/components/DocumentViewer.tsx
@@ -2284,7 +2284,7 @@ msgstr "Los archivos comprimidos no se pueden previsualizar. Descarga el archivo
 #. js-lingui-id: TdfEV7
 #: src/modules/ai/constants/AgentChatThreadFilterStatusLabels.ts
 msgid "Archived"
-msgstr ""
+msgstr "Archivado"
 
 #. js-lingui-id: Yzbh3i
 #. placeholder {0}: emailingDomain.domain
@@ -2454,7 +2454,7 @@ msgstr "Asignación"
 #. js-lingui-id: d/bvvp
 #: src/pages/settings/ai/SettingsAgentTurnDetail.tsx
 msgid "Assistant"
-msgstr ""
+msgstr "Asistente"
 
 #. js-lingui-id: 4H6WHS
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminHealthStatus.tsx
@@ -2489,7 +2489,7 @@ msgstr "a 1 minuto pasada la hora"
 #. js-lingui-id: ooA+hm
 #: src/pages/settings/ai/components/SettingsAiOverviewTab.tsx
 msgid "At a glance"
-msgstr ""
+msgstr "De un vistazo"
 
 #. js-lingui-id: vyXyF0
 #: src/modules/workflow/workflow-steps/workflow-actions/delay-actions/components/WorkflowEditActionDelay.tsx
@@ -3323,22 +3323,22 @@ msgstr "Chat"
 #. js-lingui-id: rlwve5
 #: src/modules/ai/components/AiChatThreadItemMenu.tsx
 msgid "Chat actions"
-msgstr ""
+msgstr "Acciones de chat"
 
 #. js-lingui-id: eKz2ln
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceChatThread.tsx
 msgid "Chat conversation"
-msgstr ""
+msgstr "Conversación"
 
 #. js-lingui-id: tDlhkF
 #: src/modules/ai/components/NavigationDrawerAiChatThreadItem.tsx
 msgid "Chat name"
-msgstr ""
+msgstr "Nombre de conversación"
 
 #. js-lingui-id: jTS+KY
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceDetail.tsx
 msgid "Chat Sessions"
-msgstr ""
+msgstr "Sesiones de chat"
 
 #. js-lingui-id: UxeiNP
 #: src/modules/settings/roles/role-permissions/permission-flags/hooks/useActionRolePermissionFlagConfig.ts
@@ -3348,7 +3348,7 @@ msgstr "Chatear con agentes de IA y usar funciones de IA"
 #. js-lingui-id: 8Q+lLG
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceDetail.tsx
 msgid "Chats"
-msgstr ""
+msgstr "Conversaciones"
 
 #. js-lingui-id: xK2nU3
 #: src/pages/settings/community/SettingsCommunity.tsx
@@ -3458,7 +3458,7 @@ msgstr "Limpiar"
 #. js-lingui-id: u8JHrO
 #: src/modules/ai/components/AiChatThreadFilterDropdownRootMenu.tsx
 msgid "Clear filters"
-msgstr ""
+msgstr "Limpiar filtros"
 
 #. js-lingui-id: wu0RfR
 #: src/modules/settings/admin-panel/config-variables/components/ConfigVariableHelpText.tsx
@@ -3967,13 +3967,13 @@ msgstr "Conectar con Microsoft"
 #. js-lingui-id: iZWbGJ
 #: src/modules/settings/playground/components/SettingsMcpSetup.tsx
 msgid "Connect your AI assistant"
-msgstr ""
+msgstr "Conecta tu asistente de IA"
 
 #. js-lingui-id: QHcLEN
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 msgid "Connected"
-msgstr ""
+msgstr "Conectado"
 
 #. js-lingui-id: 9TzudL
 #: src/pages/settings/accounts/SettingsAccounts.tsx
@@ -10882,7 +10882,7 @@ msgstr "Sin código de llamada"
 #. js-lingui-id: d14J3J
 #: src/modules/ai/components/NavigationDrawerAiChatContent.tsx
 msgid "No chat"
-msgstr ""
+msgstr "Sin conversaciones"
 
 #. js-lingui-id: NjIy4U
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceDetail.tsx
@@ -12910,7 +12910,7 @@ msgstr ""
 #: src/modules/ai/components/NavigationDrawerAiChatContent.tsx
 #: src/modules/ai/components/AiChatThreadsList.tsx
 msgid "Recents"
-msgstr ""
+msgstr "Recientes"
 
 #. js-lingui-id: yPrbsy
 #: src/modules/workflow/workflow-run/observability/WorkflowRunStepLogsEmailDetail.tsx
@@ -17838,7 +17838,7 @@ msgstr "Ejecución de flujo de trabajo"
 #. js-lingui-id: woYYQq
 #: src/modules/settings/roles/role-permissions/permission-flags/hooks/useSettingsRolePermissionFlagConfig.ts
 msgid "Workflows"
-msgstr "Workflows"
+msgstr "Automatizaciones"
 
 #. js-lingui-id: pmUArF
 #: src/pages/settings/security/SettingsSecuritySSOIdentifyProvider.tsx

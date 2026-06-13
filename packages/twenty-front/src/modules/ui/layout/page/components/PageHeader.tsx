@@ -84,6 +84,27 @@ const StyledIconContainer = styled.div`
   flex-direction: row;
 `;
 
+const StyledCancelButton = styled.button`
+  align-items: center;
+  background: transparent;
+  border: 1px solid ${themeCssVariables.border.color.medium};
+  border-radius: 6px;
+  color: ${themeCssVariables.font.color.secondary};
+  cursor: pointer;
+  display: flex;
+  font-family: inherit;
+  font-size: ${themeCssVariables.font.size.sm};
+  font-weight: ${themeCssVariables.font.weight.medium};
+  height: 28px;
+  padding: 0 ${themeCssVariables.spacing[2]};
+  white-space: nowrap;
+
+  &:hover {
+    background: ${themeCssVariables.background.transparent.light};
+    border-color: ${themeCssVariables.border.color.strong};
+  }
+`;
+
 type PageHeaderProps = {
   title?: ReactNode;
   hasClosePageButton?: boolean;
@@ -114,12 +135,9 @@ export const PageHeader = ({
             <NavigationDrawerCollapseButton direction="right" />
           )}
           {hasClosePageButton && (
-            <LightIconButton
-              Icon={IconX}
-              size="small"
-              accent="tertiary"
-              onClick={() => onClosePage?.()}
-            />
+            <StyledCancelButton onClick={() => onClosePage?.()}>
+              Cancelar
+            </StyledCancelButton>
           )}
 
           <StyledTopBarIconStyledTitleContainer>
