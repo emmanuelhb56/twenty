@@ -1563,7 +1563,7 @@ msgstr ""
 #. js-lingui-id: E/lGXl
 #: src/modules/settings/admin-panel/ai/components/SettingsAdminAI.tsx
 msgid "AI consumption across all workspaces."
-msgstr ""
+msgstr "Consumo de IA en todos los espacios de trabajo."
 
 #. js-lingui-id: kkfXGh
 #: src/pages/settings/ai/components/SettingsAiUsageTab.tsx
@@ -1605,7 +1605,7 @@ msgstr ""
 #. js-lingui-id: Ad11E9
 #: src/modules/settings/admin-panel/ai/components/SettingsAdminAI.tsx
 msgid "AI usage analytics across workspaces is available with an Enterprise key."
-msgstr ""
+msgstr "Los análisis de uso de IA en espacios de trabajo están disponibles con una clave Enterprise."
 
 #. js-lingui-id: zkptxb
 #: src/pages/settings/ai/components/SettingsAiUsageTab.tsx
@@ -1642,7 +1642,7 @@ msgstr ""
 #. js-lingui-id: jyqPfh
 #: src/modules/settings/admin-panel/ai/components/SettingsAdminAI.tsx
 msgid "AI Usage by Workspace"
-msgstr ""
+msgstr "Uso de IA por Espacio de Trabajo"
 
 #. js-lingui-id: KLyZ6L
 #: src/pages/settings/ai/SettingsAiUsageUserDetail.tsx
@@ -2459,7 +2459,7 @@ msgstr "Asistente"
 #. js-lingui-id: 4H6WHS
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminHealthStatus.tsx
 msgid "Asymmetric public keys used to sign and verify access tokens. Revoking a key immediately invalidates every JWT signed with it."
-msgstr ""
+msgstr "Claves públicas asimétricas para firmar y verificar tokens de acceso. Revocar una clave invalida inmediatamente todos los JWT firmados con ella."
 
 #. js-lingui-id: UHs3Ds
 #: src/modules/workflow/workflow-trigger/utils/cron-to-human/descriptors/getHoursDescription.ts
@@ -6594,7 +6594,7 @@ msgstr "Empresa"
 #: src/modules/settings/security/components/SettingsSecuritySettings.tsx
 #: src/modules/settings/admin-panel/ai/components/SettingsAdminAI.tsx
 msgid "Enterprise feature"
-msgstr ""
+msgstr "Función Enterprise"
 
 #. js-lingui-id: Kjjkt3
 #: src/pages/settings/security/event-logs/SettingsEventLogs.tsx
@@ -8624,7 +8624,7 @@ msgstr "Bandeja de entrada"
 #. js-lingui-id: j8Bj7e
 #: src/modules/settings/security/components/SettingsSecuritySettings.tsx
 msgid "Include emails where all participants share the same domain."
-msgstr ""
+msgstr "Incluir correos donde todos los participantes comparten el mismo dominio."
 
 #. js-lingui-id: mtGDyy
 #: src/pages/settings/enterprise/SettingsEnterprise.tsx
@@ -8663,7 +8663,7 @@ msgstr "Índices"
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminUpgradeStatusListCard.tsx
 #: src/modules/settings/admin-panel/components/SettingsAdminWorkspaceContent.tsx
 msgid "Inferred version"
-msgstr ""
+msgstr "Versión inferida"
 
 #. js-lingui-id: CE+M2e
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceDetail.tsx
@@ -8773,7 +8773,7 @@ msgstr "Instalando..."
 #: src/pages/settings/admin-panel/SettingsAdminInstanceStatus.tsx
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminUpgradeStatusListCard.tsx
 msgid "Instance status"
-msgstr ""
+msgstr "Estado de la instancia"
 
 #. js-lingui-id: AwUsnG
 #: src/pages/settings/data-model/constants/SettingsObjectTableMetadata.ts
@@ -9252,12 +9252,12 @@ msgstr "Última 1 Hora (del más antiguo → al más nuevo)"
 #. js-lingui-id: YoKFgq
 #: src/modules/settings/admin-panel/components/SettingsAdminGeneral.tsx
 msgid "Last 10 users created. Click to impersonate."
-msgstr ""
+msgstr "Últimos 10 usuarios creados. Haz clic para suplantar."
 
 #. js-lingui-id: sgqwjE
 #: src/modules/settings/admin-panel/components/SettingsAdminGeneral.tsx
 msgid "Last 10 users created. Click to manage feature flags or impersonate."
-msgstr ""
+msgstr "Últimos 10 usuarios creados. Haz clic para administrar funciones o suplantar."
 
 #. js-lingui-id: XUlP/Y
 #: src/modules/settings/admin-panel/health-status/constants/WorkerQueueMetricsSelectOptions.ts
@@ -12904,7 +12904,7 @@ msgstr "Eventos Recientes (del más antiguo → al más nuevo)"
 #. js-lingui-id: EoiSFI
 #: src/modules/settings/admin-panel/components/SettingsAdminGeneral.tsx
 msgid "Recent Users"
-msgstr ""
+msgstr "Usuarios recientes"
 
 #. js-lingui-id: AQbgLJ
 #: src/modules/ai/components/NavigationDrawerAiChatContent.tsx
@@ -13916,12 +13916,12 @@ msgstr "Buscar claves API"
 #. js-lingui-id: iRegw9
 #: src/modules/settings/admin-panel/components/SettingsAdminGeneral.tsx
 msgid "Search by name, email, or user ID..."
-msgstr ""
+msgstr "Buscar por nombre, correo o ID de usuario..."
 
 #. js-lingui-id: KI1xjO
 #: src/modules/settings/admin-panel/components/SettingsAdminGeneral.tsx
 msgid "Search by workspace name, subdomain, or ID..."
-msgstr ""
+msgstr "Buscar por nombre, subdominio o ID del espacio de trabajo..."
 
 #. js-lingui-id: yI4D/V
 #: src/modules/side-panel/pages/page-layout/components/dropdown-content/ChartColorSelectionDropdownContent.tsx
@@ -14712,7 +14712,7 @@ msgstr ""
 #. js-lingui-id: Gzr66P
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminHealthStatus.tsx
 msgid "Signing Keys"
-msgstr ""
+msgstr "Claves de firma"
 
 #. js-lingui-id: BZdVGR
 #: src/modules/settings/data-model/fields/forms/select/components/SettingsDataModelFieldSelectForm.tsx
@@ -15375,7 +15375,7 @@ msgstr "Sincronización fallida"
 #. js-lingui-id: tVKt7G
 #: src/modules/settings/security/components/SettingsSecuritySettings.tsx
 msgid "Sync Internal Emails"
-msgstr ""
+msgstr "Sincronizar correos internos"
 
 #. js-lingui-id: ZS+BPb
 #: src/modules/information-banner/components/reconnect-account/InformationBannerReconnectAccountInsufficientPermissions.tsx
@@ -16268,12 +16268,12 @@ msgstr "Herramientas"
 #. js-lingui-id: nCq25C
 #: src/modules/settings/admin-panel/components/SettingsAdminGeneral.tsx
 msgid "Top 10 workspaces by number of users"
-msgstr ""
+msgstr "Los 10 espacios de trabajo con más usuarios"
 
 #. js-lingui-id: A4dnvW
 #: src/modules/settings/admin-panel/components/SettingsAdminGeneral.tsx
 msgid "Top Workspaces"
-msgstr ""
+msgstr "Principales espacios de trabajo"
 
 #. js-lingui-id: 72c5Qo
 #: src/modules/page-layout/widgets/graph/graph-widget-pie-chart/hooks/usePieChartCenterMetricData.ts
@@ -16788,7 +16788,7 @@ msgstr ""
 #. js-lingui-id: j5CWO4
 #: src/modules/settings/admin-panel/utils/getUpgradeHealthStatusBadge.ts
 msgid "Up to date"
-msgstr ""
+msgstr "Actualizado"
 
 #. js-lingui-id: hmc//6
 #: src/modules/workflow/workflow-trigger/components/CronExpressionHelper.tsx
@@ -16886,7 +16886,7 @@ msgstr ""
 #. js-lingui-id: +awaFr
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminHealthStatus.tsx
 msgid "Upgrade health across instance and workspaces"
-msgstr ""
+msgstr "Estado de actualización en la instancia y espacios de trabajo"
 
 #. js-lingui-id: 7aHRdp
 #: src/modules/ai/components/AiChatCreditsExhaustedMessage.tsx
@@ -16897,7 +16897,7 @@ msgstr "Actualizar plan"
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminHealthStatus.tsx
 #: src/modules/settings/admin-panel/components/SettingsAdminWorkspaceContent.tsx
 msgid "Upgrade Status"
-msgstr ""
+msgstr "Estado de actualización"
 
 #. js-lingui-id: /l59TO
 #: src/pages/settings/admin-panel/SettingsAdminWorkspacesStatus.tsx
@@ -16925,7 +16925,7 @@ msgstr "Actualiza para acceder"
 #. js-lingui-id: Wurpq2
 #: src/modules/settings/security/components/SettingsSecuritySettings.tsx
 msgid "Upgrade to Enterprise to access audit logs."
-msgstr ""
+msgstr "Actualiza a Enterprise para acceder a los registros de auditoría."
 
 #. js-lingui-id: +Gi3x1
 #: src/pages/settings/applications/tabs/SettingsApplicationDetailAboutTab.tsx
@@ -18004,7 +18004,7 @@ msgstr "Espacios de trabajo"
 #: src/pages/settings/admin-panel/SettingsAdminWorkspacesStatus.tsx
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminUpgradeStatusListCard.tsx
 msgid "Workspaces status"
-msgstr ""
+msgstr "Estado de los espacios de trabajo"
 
 #. js-lingui-id: QPsQMb
 #: src/modules/object-record/record-group/components/RecordGroupReorderConfirmationModal.tsx

@@ -32,7 +32,7 @@ export const TabContent = ({
   const { theme } = useContext(ThemeContext);
 
   const iconColor = active
-    ? theme.font.color.primary
+    ? theme.color.blue
     : disabled
       ? theme.font.color.extraLight
       : theme.font.color.secondary;
