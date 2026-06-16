@@ -1,12 +1,13 @@
 import { FieldInputEventContext } from '@/object-record/record-field/ui/contexts/FieldInputEventContext';
 import { useFullNameField } from '@/object-record/record-field/ui/meta-types/hooks/useFullNameField';
-import { FIRST_NAME_PLACEHOLDER_WITH_SPECIAL_CHARACTER_TO_AVOID_PASSWORD_MANAGERS } from '@/object-record/record-field/ui/meta-types/input/constants/FirstNamePlaceholder';
-import { LAST_NAME_PLACEHOLDER_WITH_SPECIAL_CHARACTER_TO_AVOID_PASSWORD_MANAGERS } from '@/object-record/record-field/ui/meta-types/input/constants/LastNamePlaceholder';
 import { isDoubleTextFieldEmpty } from '@/object-record/record-field/ui/meta-types/input/utils/isDoubleTextFieldEmpty';
 import { type FieldDoubleText } from '@/object-record/record-field/ui/types/FieldDoubleText';
 
 import { useContext } from 'react';
 import { RecordTitleDoubleTextInput } from './RecordTitleDoubleTextInput';
+
+const FIRST_NAME_PLACEHOLDER = 'N‌‌ombre';
+const LAST_NAME_PLACEHOLDER = 'A‌‌pellido';
 
 type RecordTitleFullNameFieldInputProps = {
   sizeVariant?: 'xs' | 'sm' | 'md';
@@ -71,12 +72,8 @@ export const RecordTitleFullNameFieldInput = ({
     <RecordTitleDoubleTextInput
       firstValue={draftValue?.firstName ?? ''}
       secondValue={draftValue?.lastName ?? ''}
-      firstValuePlaceholder={
-        FIRST_NAME_PLACEHOLDER_WITH_SPECIAL_CHARACTER_TO_AVOID_PASSWORD_MANAGERS
-      }
-      secondValuePlaceholder={
-        LAST_NAME_PLACEHOLDER_WITH_SPECIAL_CHARACTER_TO_AVOID_PASSWORD_MANAGERS
-      }
+      firstValuePlaceholder={FIRST_NAME_PLACEHOLDER}
+      secondValuePlaceholder={LAST_NAME_PLACEHOLDER}
       onClickOutside={handleClickOutside}
       onEnter={handleEnter}
       onEscape={handleEscape}

@@ -24,16 +24,18 @@ export const StyledPageInfoTextContainer = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
-  gap: ${themeCssVariables.spacing[0.5]};
+  gap: ${themeCssVariables.spacing[2]};
   min-width: 0;
+  overflow: hidden;
 `;
 
 export const StyledPageInfoTitleContainer = styled.div`
   color: ${themeCssVariables.font.color.primary};
   font-size: ${themeCssVariables.font.size.md};
   font-weight: ${themeCssVariables.font.weight.semiBold};
-  max-width: 150px;
+  flex: 1;
   min-width: 0;
+  overflow: hidden;
   padding-inline: ${themeCssVariables.spacing[1]};
 `;
 

@@ -58,6 +58,7 @@ export const InformationBanner = ({
 
   const isPrimary = variant === 'primary';
   const buttonAccent = color === 'danger' ? 'danger' : 'blue';
+  const isAmber = color === 'amber';
 
   return (
     <InformationBannerComponentInstanceContext.Provider
@@ -72,18 +73,18 @@ export const InformationBanner = ({
             {buttonTitle && buttonOnClick && (
               <Button
                 variant="secondary"
-                accent={buttonAccent}
+                accent={isAmber ? 'default' : buttonAccent}
                 title={buttonTitle}
                 Icon={buttonIcon}
                 size="small"
-                inverted={isPrimary}
+                inverted={isPrimary && !isAmber}
                 onClick={buttonOnClick}
                 disabled={isButtonDisabled}
               />
             )}
           </StyledContent>
           {onClose &&
-            (isPrimary ? (
+            (isPrimary && !isAmber ? (
               <StyledInvertedIconButton
                 Icon={IconX}
                 size="small"
@@ -96,7 +97,7 @@ export const InformationBanner = ({
                 Icon={IconX}
                 size="small"
                 variant="tertiary"
-                accent={buttonAccent}
+                accent={isAmber ? 'default' : buttonAccent}
                 onClick={onClose}
                 ariaLabel={t`Close banner`}
               />

@@ -32,6 +32,7 @@ export const InformationBannerReconnectAccountEmailAliases = () => {
   return (
     <InformationBanner
       componentInstanceId={COMPONENT_INSTANCE_ID}
+      color="amber"
       variant="secondary"
       message={t`Please reconnect your mailbox ${mailboxHandle} to update your email aliases:`}
       buttonTitle={t`Reconnect`}

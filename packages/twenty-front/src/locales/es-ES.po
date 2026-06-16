@@ -4530,7 +4530,7 @@ msgstr "Creado"
 #. js-lingui-id: 4fBuqE
 #: src/modules/side-panel/components/SidePanelRecordInfo.tsx
 msgid "Created {beautifiedCreatedAt}"
-msgstr ""
+msgstr "Creado {beautifiedCreatedAt}"
 
 #. js-lingui-id: NCIYDF
 #: src/modules/settings/applications/components/SettingsApplicationAboutSidebar.tsx
@@ -6162,7 +6162,7 @@ msgstr "El correo electrónico o el dominio ya están en la lista de bloqueo"
 #. js-lingui-id: Xl929X
 #: src/modules/activities/emails/hooks/useSendEmail.ts
 msgid "Email sent successfully"
-msgstr ""
+msgstr "Correo enviado correctamente"
 
 #. js-lingui-id: jvneza
 #: src/modules/settings/applications/components/SettingsApplicationAboutSidebar.tsx
@@ -7712,7 +7712,7 @@ msgstr "Primeras 5 líneas"
 #. js-lingui-id: V1EGGU
 #: src/modules/object-metadata/hooks/useSortSubFieldChoicesForField.ts
 msgid "First name"
-msgstr ""
+msgstr "Nombre"
 
 #. js-lingui-id: kODvZJ
 #: src/pages/onboarding/CreateProfile.tsx
@@ -9342,7 +9342,7 @@ msgstr "Último mensaje {lastMessageSentAtFormatted}"
 #: src/modules/settings/members/components/MemberNameFields.tsx
 #: src/modules/object-metadata/hooks/useSortSubFieldChoicesForField.ts
 msgid "Last name"
-msgstr ""
+msgstr "Apellido"
 
 #. js-lingui-id: UXBCwc
 #: src/pages/onboarding/CreateProfile.tsx
@@ -10601,13 +10601,13 @@ msgstr "Nueva conversación"
 #. js-lingui-id: 3RwJHq
 #: src/modules/side-panel/hooks/useOpenComposeEmailInSidePanel.ts
 msgid "New Email"
-msgstr ""
+msgstr "Nuevo correo"
 
 #. js-lingui-id: VJZNJt
 #: src/modules/settings/accounts/components/SettingsAccountsNewEmailGroupChannel.tsx
 #: src/modules/settings/accounts/components/SettingsAccountsNewEmailGroupChannel.tsx
 msgid "New Email Handle"
-msgstr ""
+msgstr "Nuevo correo electrónico"
 
 #. js-lingui-id: wqoYqp
 #: src/pages/settings/emailing-domains/SettingsNewEmailingDomain.tsx
@@ -14157,7 +14157,7 @@ msgstr "Ver registros en todos los objetos"
 #. js-lingui-id: eQ3co2
 #: src/pages/settings/data-model/SettingsObjects.tsx
 msgid "See your data structure as an interactive diagram"
-msgstr ""
+msgstr "Ve tu estructura de datos como un diagrama interactivo"
 
 #. js-lingui-id: Hhnssf
 #: src/pages/settings/applications/components/SettingsApplicationTableRow.tsx
@@ -17500,7 +17500,7 @@ msgstr "Visualizar"
 #. js-lingui-id: VvM/Ty
 #: src/pages/settings/data-model/SettingsObjects.tsx
 msgid "Visualize data model"
-msgstr ""
+msgstr "Visualizar modelo de datos"
 
 #. js-lingui-id: uUehLT
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminQueueJobsTable.tsx
@@ -18109,6 +18109,9 @@ msgstr "sí"
 #: src/modules/settings/admin-panel/apps/components/SettingsAdminApps.tsx
 msgid "Yes"
 msgstr "Sí"
+
+msgid "You"
+msgstr "Tú"
 
 #. js-lingui-id: y/0uwd
 #: src/modules/localization/utils/formatDateISOStringToRelativeDate.ts

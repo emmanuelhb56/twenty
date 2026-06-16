@@ -42,6 +42,10 @@
   --t-color-blue12:          #14532d;
   --t-border-color-blue:     #ffffff;
 
+  /* Botón deshabilitado/cargando → verde claro en vez de azul */
+  --t-accent-accent3570:     #86efac;
+  --t-accent-accent4060:     #86efac;
+
   /* Tooltips → verde oscuro */
   --t-color-transparent-gray11: rgba(9, 9, 11, 0.92);
 }
@@ -77,6 +81,10 @@
   --t-color-blue10:          #16a34a;
   --t-color-blue12:          #14532d;
   --t-border-color-blue:     #ffffff;
+
+  /* Botón deshabilitado/cargando → verde claro en vez de azul */
+  --t-accent-accent3570:     rgba(34, 197, 94, 0.5);
+  --t-accent-accent4060:     rgba(34, 197, 94, 0.5);
 
   --t-color-transparent-gray11: rgba(250, 250, 250, 0.92);
 }
@@ -133,8 +141,7 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none !important;
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px rgba(34, 197, 94, 0.5) !important;
-  border-color: #22c55e !important;
+  box-shadow: none !important;
 }
 
 /* ─── CARDS / PANELS — sombra sutil shadcn ───────────────────── */
