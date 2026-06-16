@@ -6323,7 +6323,7 @@ msgstr "Habilitar funciones específicas del modelo"
 #. js-lingui-id: IrI9pg
 #: src/modules/settings/admin-panel/health-status/maintenance-mode/components/SettingsAdminMaintenanceMode.tsx
 msgid "End date"
-msgstr ""
+msgstr "Fecha de fin"
 
 #. js-lingui-id: VFv2ZC
 #: src/pages/settings/security/event-logs/components/EventLogFilters.tsx
@@ -15054,7 +15054,7 @@ msgstr "Inicia una nueva suscripción Enterprise."
 #. js-lingui-id: WAjFYI
 #: src/modules/settings/admin-panel/health-status/maintenance-mode/components/SettingsAdminMaintenanceMode.tsx
 msgid "Start date"
-msgstr ""
+msgstr "Fecha de inicio"
 
 #. js-lingui-id: D3iCkb
 #: src/pages/settings/security/event-logs/components/EventLogFilters.tsx
@@ -17969,7 +17969,7 @@ msgstr "Miembro del espacio de trabajo"
 #. js-lingui-id: wtxjAY
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceDetail.tsx
 msgid "Workspace members"
-msgstr ""
+msgstr "Miembros del espacio de trabajo"
 
 #. js-lingui-id: CozWO1
 #: src/pages/onboarding/CreateWorkspace.tsx
