@@ -31,7 +31,6 @@ export const AdvancedSettingsToggle = ({
       <Toggle
         id={instanceId}
         onChange={onChange}
-        color={theme.color.yellow}
         value={isAdvancedModeEnabled}
       />
     </label>

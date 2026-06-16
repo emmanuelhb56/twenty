@@ -30,6 +30,17 @@ const StyledContent = styled.div<{ hasCloseButton: boolean }>`
   margin-left: ${({ hasCloseButton }) => (hasCloseButton ? '24px' : '0')};
 `;
 
+const StyledAmberButton = styled.span`
+  button {
+    background-color: #d97706 !important;
+    border-color: transparent !important;
+    color: #ffffff !important;
+  }
+  button:hover:not(:disabled) {
+    background-color: #b45309 !important;
+  }
+`;
+
 export const InformationBanner = ({
   message,
   color = 'blue',
@@ -71,16 +82,30 @@ export const InformationBanner = ({
           <StyledContent hasCloseButton={!!onClose}>
             <StyledText>{message}</StyledText>
             {buttonTitle && buttonOnClick && (
-              <Button
-                variant="secondary"
-                accent={isAmber ? 'default' : buttonAccent}
-                title={buttonTitle}
-                Icon={buttonIcon}
-                size="small"
-                inverted={isPrimary && !isAmber}
-                onClick={buttonOnClick}
-                disabled={isButtonDisabled}
-              />
+              isAmber ? (
+                <StyledAmberButton>
+                  <Button
+                    variant="secondary"
+                    accent="default"
+                    title={buttonTitle}
+                    Icon={buttonIcon}
+                    size="small"
+                    onClick={buttonOnClick}
+                    disabled={isButtonDisabled}
+                  />
+                </StyledAmberButton>
+              ) : (
+                <Button
+                  variant="secondary"
+                  accent={buttonAccent}
+                  title={buttonTitle}
+                  Icon={buttonIcon}
+                  size="small"
+                  inverted={isPrimary}
+                  onClick={buttonOnClick}
+                  disabled={isButtonDisabled}
+                />
+              )
             )}
           </StyledContent>
           {onClose &&
