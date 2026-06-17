@@ -274,6 +274,15 @@ export default defineConfig(({ mode }) => {
         { find: /^@\//, replacement: path.resolve(__dirname, 'src/modules') + '/' },
         { find: /^~\//, replacement: path.resolve(__dirname, 'src') + '/' },
         { find: 'path', replacement: 'rollup-plugin-node-polyfills/polyfills/path' },
+        // monaco-graphql is a transitive dep hoisted under @graphiql/react — point
+        // Rolldown to the concrete path so ?worker imports resolve correctly.
+        {
+          find: 'monaco-graphql',
+          replacement: path.resolve(
+            __dirname,
+            '../../node_modules/@graphiql/react/node_modules/monaco-graphql',
+          ),
+        },
       ],
     },
   };
