@@ -1,6 +1,8 @@
+import { useServerCommandMenuItemLabel } from '@/command-menu-item/hooks/useServerCommandMenuItemLabel';
 import { getCommandMenuItemLabel } from '@/command-menu-item/utils/getCommandMenuItemLabel';
 import { styled } from '@linaria/react';
 import { type MessageDescriptor } from '@lingui/core';
+import { isString } from '@sniptt/guards';
 import { type MouseEvent } from 'react';
 import { type Nullable } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
@@ -34,10 +36,17 @@ export const CommandMenuButton = ({
   disabled = false,
   isPrimaryAction = false,
 }: CommandMenuButtonProps) => {
-  const resolvedLabel = getCommandMenuItemLabel(command.label);
+  const translateServerLabel = useServerCommandMenuItemLabel();
+
+  const resolveLabel = (label: Nullable<string | MessageDescriptor>) => {
+    const base = getCommandMenuItemLabel(label);
+    return isString(label) ? translateServerLabel(base) : base;
+  };
+
+  const resolvedLabel = resolveLabel(command.label);
 
   const resolvedShortLabel = isDefined(command.shortLabel)
-    ? getCommandMenuItemLabel(command.shortLabel)
+    ? resolveLabel(command.shortLabel)
     : undefined;
 
   const buttonAccent = command.isPrimaryCTA ? 'blue' : 'default';
