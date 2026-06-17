@@ -34,7 +34,15 @@ export const WorkflowDiagramStepNodeReadonly = ({
   id: string;
   data: WorkflowDiagramStepNodeData;
 }) => {
+  const { t } = useLingui();
   const { getIcon } = useIcons();
+
+  const nodeTypeLabel =
+    data.nodeType === 'trigger'
+      ? t`Trigger`
+      : data.nodeType === 'action'
+        ? t`Action`
+        : capitalize(data.nodeType);
 
   const workflowVisualizerWorkflowId = useAtomComponentStateValue(
     workflowVisualizerWorkflowIdComponentState,

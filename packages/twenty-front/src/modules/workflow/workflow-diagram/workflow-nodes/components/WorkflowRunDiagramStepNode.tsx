@@ -85,7 +85,15 @@ export const WorkflowRunDiagramStepNode = ({
   id: string;
   data: WorkflowRunDiagramStepNodeData;
 }) => {
+  const { t } = useLingui();
   const { getIcon } = useIcons();
+
+  const nodeTypeLabel =
+    data.nodeType === 'trigger'
+      ? t`Trigger`
+      : data.nodeType === 'action'
+        ? t`Action`
+        : capitalize(data.nodeType);
 
   const workflowVisualizerWorkflowId = useAtomComponentStateValue(
     workflowVisualizerWorkflowIdComponentState,

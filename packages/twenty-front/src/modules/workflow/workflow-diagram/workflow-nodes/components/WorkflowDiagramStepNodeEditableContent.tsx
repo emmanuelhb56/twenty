@@ -51,7 +51,14 @@ export const WorkflowDiagramStepNodeEditableContent = ({
   selected: boolean;
   onClick?: () => void;
 }) => {
-  const { i18n } = useLingui();
+  const { i18n, t } = useLingui();
+
+  const nodeTypeLabel =
+    data.nodeType === 'trigger'
+      ? t`Trigger`
+      : data.nodeType === 'action'
+        ? t`Action`
+        : capitalize(data.nodeType);
 
   const [isHovered, setIsHovered] = useState(false);
 
