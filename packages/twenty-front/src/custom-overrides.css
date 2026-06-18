@@ -461,3 +461,12 @@ a[data-active]::after,
 button[data-active]::after {
   background-color: var(--t-color-blue) !important;
 }
+
+/*
+ * Sidebar navigation links use aria-selected="true" for the active state
+ * (not data-active). Inline Linaria styles set --ssah...-2 to
+ * --t-font-color-primary (dark), so we override color directly.
+ */
+a[aria-selected='true'].navigation-drawer-item {
+  color: var(--t-color-blue) !important;
+}

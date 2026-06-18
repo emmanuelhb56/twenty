@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react/macro';
 import { styled } from '@linaria/react';
 import { useContext, useRef } from 'react';
 
@@ -59,6 +60,7 @@ export const CalendarEventParticipantsResponseStatusField = ({
   participants: CalendarEventParticipant[];
 }) => {
   const { theme } = useContext(ThemeContext);
+  const { t } = useLingui();
 
   const Icon = {
     Yes: <IconCheck stroke={theme.icon.stroke.sm} />,
@@ -66,6 +68,13 @@ export const CalendarEventParticipantsResponseStatusField = ({
     No: <IconX stroke={theme.icon.stroke.sm} />,
   }[responseStatus];
 
+  const label = {
+    Yes: t`Yes`,
+    Maybe: t`Maybe`,
+    No: t`No`,
+  }[responseStatus];
+
+  // We want to display external participants first
   const orderedParticipants = [
     ...participants.filter((participant) => participant.person),
     ...participants.filter((participant) => participant.workspaceMember),
@@ -84,7 +93,7 @@ export const CalendarEventParticipantsResponseStatusField = ({
       <StyledLabelAndIconContainer>
         <StyledIconContainer>{Icon}</StyledIconContainer>
         <StyledLabelContainer width={72}>
-          <EllipsisDisplay>{responseStatus}</EllipsisDisplay>
+          <EllipsisDisplay>{label}</EllipsisDisplay>
         </StyledLabelContainer>
       </StyledLabelAndIconContainer>
       <StyledParticipantsContainer ref={participantsContainerRef}>

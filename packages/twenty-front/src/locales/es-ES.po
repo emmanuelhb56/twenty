@@ -10154,6 +10154,9 @@ msgstr "Administrado"
 msgid "Manual"
 msgstr "Manual"
 
+msgid "Maybe"
+msgstr "Quizás"
+
 #. js-lingui-id: Zt5PUS
 #: src/pages/settings/applications/SettingsApplications.tsx
 msgid "Marketplace"

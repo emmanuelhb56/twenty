@@ -308,7 +308,7 @@ msgstr "Un miembro del espacio de trabajo"
 #. js-lingui-id: bzMKg7
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-calendar-event-participant-standard-flat-field-metadata.util.ts
 msgid "Accepted"
-msgstr ""
+msgstr "Aceptado"
 
 #. js-lingui-id: qjrxU8
 #: src/engine/core-modules/file-storage/interfaces/file-storage-exception.ts
@@ -1879,7 +1879,7 @@ msgstr "Diciembre"
 #. js-lingui-id: ztGxi6
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-calendar-event-participant-standard-flat-field-metadata.util.ts
 msgid "Declined"
-msgstr ""
+msgstr "Rechazado"
 
 #. js-lingui-id: cgV4xo
 #: src/engine/metadata-modules/permissions/permissions.exception.ts
@@ -4624,7 +4624,7 @@ msgstr "El tipo de elemento del menú de navegación es obligatorio"
 #. js-lingui-id: t6LpHj
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-calendar-event-participant-standard-flat-field-metadata.util.ts
 msgid "Needs Action"
-msgstr ""
+msgstr "Pendiente"
 
 #. js-lingui-id: isRobC
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-opportunity-standard-flat-field-metadata.util.ts
@@ -5903,7 +5903,7 @@ msgstr "El formato de respuesta con tipo \"text\" no debe incluir un esquema"
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-calendar-event-participant-standard-flat-field-metadata.util.ts
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-calendar-event-participant-standard-flat-field-metadata.util.ts
 msgid "Response Status"
-msgstr ""
+msgstr "Estado de respuesta"
 
 #. js-lingui-id: 1AYnSb
 #: src/engine/metadata-modules/page-layout-widget/constants/standard-page-layout-widget-titles.ts
@@ -6661,7 +6661,7 @@ msgstr "No se puede descargar el archivo temporal."
 #. js-lingui-id: 3WYP3r
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-calendar-event-participant-standard-flat-field-metadata.util.ts
 msgid "Tentative"
-msgstr ""
+msgstr "Tentativo"
 
 #. js-lingui-id: M10it4
 #: src/utils/__test__/custom-exception.spec.ts
