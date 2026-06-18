@@ -23,6 +23,8 @@ import { IconX } from 'twenty-ui/icon';
 import { IconButton } from 'twenty-ui/input';
 import { useIsMobile } from 'twenty-ui/utilities';
 import { ThemeContext, themeCssVariables } from 'twenty-ui/theme-constants';
+import { IconX } from 'twenty-ui/icon';
+import { IconButton } from 'twenty-ui/input';
 
 const StyledInputContainer = styled.div<{ isMobile: boolean }>`
   align-items: center;
@@ -104,6 +106,8 @@ export const SidePanelTopBar = () => {
 
   const { contextChips } = useSidePanelContextChips();
 
+  const { closeSidePanelMenu } = useSidePanelMenu();
+
   const { pushFocusItemToFocusStack } = usePushFocusItemToFocusStack();
   const { removeFocusItemFromFocusStackById } =
     useRemoveFocusItemFromFocusStackById();
@@ -177,6 +181,13 @@ export const SidePanelTopBar = () => {
       </StyledContentContainer>
       <StyledRightControlsContainer>
         <SidePanelTopBarRightCornerIcon />
+        <IconButton
+          Icon={IconX}
+          size="small"
+          variant="tertiary"
+          onClick={closeSidePanelMenu}
+          ariaLabel={t`Close`}
+        />
       </StyledRightControlsContainer>
     </StyledInputContainer>
   );
