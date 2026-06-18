@@ -67,9 +67,9 @@ export class StageSyncService {
       );
     }
 
-    // Reemplazo total de opciones + ajuste del defaultValue a la primera etapa
-    // nueva (el campo es no-nulo y su valor por defecto debe existir entre las
-    // opciones). Twenty guarda el defaultValue de un SELECT entre comillas.
+    // Full replacement of options + update defaultValue to first new option
+    // (field is non-nullable, its default must exist among the new options).
+    // Twenty stores SELECT defaultValue wrapped in single quotes.
     const updateFieldInput: Omit<UpdateFieldInput, 'workspaceId'> = {
       id: stageField.id,
       options,
@@ -83,7 +83,7 @@ export class StageSyncService {
 
     return {
       success: true,
-      message: `Se sincronizaron ${options.length} etapas.`,
+      message: `Synced ${options.length} stage(s) successfully.`,
       options,
     };
   }

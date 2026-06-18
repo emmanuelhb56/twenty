@@ -17,6 +17,6 @@ export type WebhookStage = {
   color?: string;
 };
 
-export type WebhookStagesResponse = {
-  stages: WebhookStage[];
-};
+export type WebhookStagesResponse =
+  | { stages: WebhookStage[] }
+  | [{ stages: WebhookStage[] }];

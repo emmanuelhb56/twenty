@@ -4897,12 +4897,12 @@ msgstr "Personalizar campos"
 #. js-lingui-id: 0lvH/K
 #: src/pages/settings/layout/SettingsLayout.tsx
 msgid "Customize how your workspace looks."
-msgstr ""
+msgstr "Personaliza cómo se ve tu espacio de trabajo."
 
 #. js-lingui-id: zZksLX
 #: src/pages/settings/layout/SettingsLayout.tsx
 msgid "Customize layout"
-msgstr ""
+msgstr "Personalizar diseño"
 
 #. js-lingui-id: NSv0tC
 #: src/modules/settings/roles/role-permissions/permission-flags/hooks/useSettingsRolePermissionFlagConfig.ts

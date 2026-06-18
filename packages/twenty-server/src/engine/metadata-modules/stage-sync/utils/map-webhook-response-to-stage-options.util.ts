@@ -90,7 +90,9 @@ const toOptionValue = (input: string): string => {
 export const mapWebhookResponseToStageOptions = (
   response: WebhookStagesResponse,
 ): FieldMetadataComplexOption[] => {
-  const stages = response?.stages;
+  // Accept both { stages: [...] } and [{ stages: [...] }]
+  const normalized = Array.isArray(response) ? response[0] : response;
+  const stages = normalized?.stages;
 
   if (!Array.isArray(stages) || stages.length === 0) {
     throw new Error(

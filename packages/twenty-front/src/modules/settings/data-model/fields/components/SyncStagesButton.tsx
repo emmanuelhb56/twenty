@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { useFormContext } from 'react-hook-form';
 import { isDefined } from 'twenty-shared/utils';
-import { IconRefresh } from 'twenty-ui/display';
+import { IconRefresh } from 'twenty-ui/icon';
 import { Button } from 'twenty-ui/input';
 
 import { useSyncOpportunityStages } from '@/object-metadata/hooks/useSyncOpportunityStages';
