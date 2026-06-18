@@ -1,5 +1,5 @@
 .separator {
-  background: var(--t-font-color-light);
+  background: var(--t-font-color-secondary);
   height: var(--t-spacing-4);
   margin: 0;
   width: 1px;
@@ -12,17 +12,25 @@
     background: var(--t-buttons-secondary-text-color);
   }
 
+  &[data-accent='blue'][data-variant='primary'] {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
   &[data-accent='danger'] {
     background: var(--t-border-color-danger);
   }
 }
 
 .shortcutLabel {
-  color: var(--t-font-color-light);
+  color: var(--t-font-color-secondary);
   font-weight: var(--t-font-weight-medium);
 
   &[data-accent='blue'] {
     color: var(--t-buttons-secondary-text-color);
+  }
+
+  &[data-accent='blue'][data-variant='primary'] {
+    color: rgba(255, 255, 255, 0.7);
   }
 
   &[data-accent='danger'] {

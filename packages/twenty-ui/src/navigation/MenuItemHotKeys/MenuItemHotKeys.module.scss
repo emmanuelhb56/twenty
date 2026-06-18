@@ -7,7 +7,7 @@
 }
 
 .commandText {
-  color: var(--t-font-color-light);
+  color: var(--t-font-color-secondary);
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -15,8 +15,8 @@
 .commandKey {
   box-sizing: content-box;
   align-items: center;
-  background-color: var(--t-background-secondary);
-  border: 1px solid var(--t-border-color-strong);
+  background-color: var(--t-background-tertiary);
+  border: 1px solid var(--t-border-color-medium);
   border-radius: var(--t-border-radius-sm);
   box-shadow: var(--t-box-shadow-underline);
   display: flex;

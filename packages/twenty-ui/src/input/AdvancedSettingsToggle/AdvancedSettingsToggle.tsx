@@ -1,7 +1,6 @@
 import { Toggle } from '@ui/input';
-import { ThemeContext } from '@ui/theme-constants';
 import { clsx } from 'clsx';
-import { useContext, useId } from 'react';
+import { useId } from 'react';
 
 import styles from './AdvancedSettingsToggle.module.scss';
 
@@ -18,8 +17,6 @@ export const AdvancedSettingsToggle = ({
   label = 'Advanced',
   className,
 }: AdvancedSettingsToggleProps) => {
-  const { theme } = useContext(ThemeContext);
-
   const onChange = (newValue: boolean) => {
     setIsAdvancedModeEnabled(newValue);
   };

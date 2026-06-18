@@ -16,7 +16,7 @@ import { useStore } from 'jotai';
 import { useCallback, useEffect, useState } from 'react';
 import { type APP_LOCALES, SOURCE_LOCALE } from 'twenty-shared/translations';
 import { type ObjectPermissions } from 'twenty-shared/types';
-import { isDefined } from 'twenty-shared/utils';
+import { isDefined, isValidLocale, normalizeLocale } from 'twenty-shared/utils';
 import { useQuery } from '@apollo/client/react';
 import {
   type WorkspaceMember,
@@ -62,6 +62,31 @@ export const UserMetadataProviderInitialEffect = () => {
     },
     [store],
   );
+
+  // Pre-initialize date locale from localStorage so relative dates (e.g. "hace 2 días")
+  // appear in the correct language while the user query is still loading.
+  useEffect(() => {
+    try {
+      const storageLocale = localStorage.getItem('locale');
+      if (storageLocale) {
+        const normalized = normalizeLocale(storageLocale);
+        if (isValidLocale(normalized)) {
+          const locale = normalized as keyof typeof APP_LOCALES;
+          getDateFnsLocale(locale).then((localeCatalog) => {
+            const current = store.get(dateLocaleState.atom);
+            if (!current.locale) {
+              store.set(dateLocaleState.atom, {
+                locale,
+                localeCatalog: localeCatalog || enUS,
+              });
+            }
+          });
+        }
+      }
+    } catch {
+      // localStorage not available
+    }
+  }, [store]);
 
   const shouldSkipUserQuery = !hasAccessTokenPair;
 

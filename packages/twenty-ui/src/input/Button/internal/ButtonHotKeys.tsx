@@ -20,7 +20,7 @@ export const ButtonHotkeys = ({
 }) => {
   return (
     <>
-      <div className={styles.separator} data-size={size} data-accent={accent} />
+      <div className={styles.separator} data-size={size} data-accent={accent} data-variant={variant} />
       <div
         className={styles.shortcutLabel}
         data-variant={variant}
