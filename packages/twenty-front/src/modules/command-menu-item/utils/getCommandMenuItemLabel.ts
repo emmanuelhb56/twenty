@@ -10,12 +10,5 @@ export const getCommandMenuItemLabel = (
     return '';
   }
 
-  if (!isString(label)) {
-    return i18n._(label);
-  }
-
-  // Try to translate server-defined string labels via the active catalog.
-  // If no translation exists, the original string is returned as fallback.
-  const translated = i18n._({ id: label, message: label });
-  return translated;
+  return isString(label) ? label : i18n._(label);
 };
