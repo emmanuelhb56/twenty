@@ -196,6 +196,17 @@ export class ConfigVariables {
   @ConfigVariablesMetadata({
     group: ConfigVariablesGroup.ADVANCED_SETTINGS,
     description:
+      'Webhook URL that returns the Opportunity stage catalog (n8n mock today, ERP API later). Consumed by the "Sync stages" action.',
+    type: ConfigVariableType.STRING,
+    isEnvOnly: true,
+  })
+  @IsUrl({ require_tld: false, require_protocol: true })
+  @IsOptional()
+  STAGES_SYNC_WEBHOOK_URL: string;
+
+  @ConfigVariablesMetadata({
+    group: ConfigVariablesGroup.ADVANCED_SETTINGS,
+    description:
       "Enable or disable requests to twenty-icons to get companies' icons",
     type: ConfigVariableType.BOOLEAN,
   })

@@ -1,0 +1,65 @@
+{
+  "name": "Stages Mock API (Twenty - sync etapas)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "stages-mock",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "11111111-1111-4111-8111-111111111111",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [260, 300],
+      "webhookId": "stages-mock-webhook",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// MOCK API DE ETAPAS (Stage) - contrato de datos\n// ------------------------------------------------------------\n// Este nodo SIMULA la respuesta del ERP. Imita la forma real de\n// la tabla de etapas del ERP para que, cuando exista la API real,\n// solo haya que cambiar STAGES_SYNC_WEBHOOK_URL en el backend de\n// Twenty (el mapper mapWebhookResponseToStageOptions NO se toca).\n//\n// Forma del ERP (campos relevantes de la tabla de etapas):\n//   id              bigint  -> identificador estable de la etapa\n//   nombre          string  -> nombre visible de la etapa\n//   descripcion     string  -> informativo (no se usa en el select)\n//   es_etapa_cierre 0|1     -> marca la etapa ganada / de cierre\n//\n// El backend de Twenty mapea cada etapa a una opcion del SELECT asi:\n//   value    <- STAGE_<id>   (clave interna; prefijo STAGE_ porque Twenty exige\n//                             UPPER_CASE snake_case y un enum GraphQL no puede empezar con digito)\n//   label    <- nombre       (texto visible en la UI)\n//   color    <- generado por posicion (el ERP no manda color)\n//   position <- orden del array\n//   id       <- uuid v4 generado por el backend\n// ============================================================\n\nreturn [\n  {\n    json: {\n      stages: [\n        { id: 1, nombre: 'Contactar cliente', descripcion: 'Primer contacto con el prospecto', es_etapa_cierre: 0 },\n        { id: 2, nombre: 'Calificacion',      descripcion: 'Validar interes y presupuesto',     es_etapa_cierre: 0 },\n        { id: 3, nombre: 'Propuesta',         descripcion: 'Propuesta enviada',                 es_etapa_cierre: 0 },\n        { id: 4, nombre: 'Negociacion',       descripcion: 'Negociacion en curso',              es_etapa_cierre: 0 },\n        { id: 5, nombre: 'Cerrado ganado',    descripcion: 'Oportunidad ganada',                es_etapa_cierre: 1 },\n      ],\n    },\n  },\n];\n"
+      },
+      "id": "22222222-2222-4222-8222-222222222222",
+      "name": "Etapas (datos estaticos)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      },
+      "id": "33333333-3333-4333-8333-333333333333",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "content": "## Mock API de Etapas (Stage)\n\n**GET** `/webhook/stages-mock` -> devuelve `{ \"stages\": [...] }`\n\n### Como usar\n1. Importar este workflow en n8n.\n2. Activarlo (toggle Active).\n3. Copiar la **Production URL** del nodo Webhook.\n4. Pegarla en `STAGES_SYNC_WEBHOOK_URL` del backend de Twenty.\n\n### Por que GET\nEs una lectura idempotente de un catalogo de etapas; se puede probar pegando la URL en el navegador.\n\n### Contrato\nEl JSON imita la tabla de etapas del ERP (`id`, `nombre`, `descripcion`, `es_etapa_cierre`). Para conectar la API real solo se cambia la URL: el mapper del backend (`mapWebhookResponseToStageOptions`) no se toca.",
+        "height": 320,
+        "width": 380
+      },
+      "id": "44444444-4444-4444-8444-444444444444",
+      "name": "Contrato de datos",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [180, 460]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Etapas (datos estaticos)", "type": "main", "index": 0 }]]
+    },
+    "Etapas (datos estaticos)": {
+      "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

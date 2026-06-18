@@ -161,6 +161,14 @@ const StyledHelpText = styled.div`
   margin-top: ${themeCssVariables.spacing[1]};
 `;
 
+const StyledEmptyOptions = styled.div`
+  color: ${themeCssVariables.font.color.tertiary};
+  font-size: ${themeCssVariables.font.size.sm};
+  font-style: italic;
+  padding: ${themeCssVariables.spacing[3]} 0;
+  text-align: center;
+`;
+
 export const SettingsDataModelFieldSelectForm = ({
   existingFieldMetadataId,
   fieldType,
@@ -428,6 +436,10 @@ export const SettingsDataModelFieldSelectForm = ({
                       {t`Enter one option per line. Each line will become a new option.`}
                     </StyledHelpText>
                   </StyledTextAreaContainer>
+                ) : options.length === 0 ? (
+                  <StyledEmptyOptions>
+                    {t`No options yet. Add one below or use "Sync stages".`}
+                  </StyledEmptyOptions>
                 ) : (
                   <>
                     <DraggableList

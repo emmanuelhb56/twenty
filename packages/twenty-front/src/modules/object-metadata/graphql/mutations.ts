@@ -254,6 +254,20 @@ export const DELETE_ONE_FIELD_METADATA_ITEM = gql`
   }
 `;
 
+// Sincroniza las opciones del campo "stage" de Opportunity con el catálogo que
+// devuelve un webhook externo (mock n8n hoy, ERP real después). El backend hace
+// el fetch, mapea y reemplaza las opciones; aquí sólo disparamos y recibimos las
+// nuevas opciones para refrescar el store de metadata sin recargar.
+export const SYNC_OPPORTUNITY_STAGES = gql`
+  mutation SyncOpportunityStages {
+    syncOpportunityStages {
+      success
+      message
+      options
+    }
+  }
+`;
+
 export const CREATE_ONE_INDEX_METADATA_ITEM = gql`
   mutation CreateOneIndexMetadataItem($input: CreateOneIndexInput!) {
     createOneIndex(input: $input) {
