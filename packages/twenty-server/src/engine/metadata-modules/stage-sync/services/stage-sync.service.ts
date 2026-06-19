@@ -18,6 +18,17 @@ const OPPORTUNITY_OBJECT_NAME_SINGULAR = 'opportunity';
 const STAGE_FIELD_NAME = 'stage';
 const WEBHOOK_TIMEOUT_MS = 10_000;
 
+// Valores por defecto que Twenty inserta en instalación nueva.
+// Si el campo solo tiene estos valores, se considera "no sincronizado aún".
+const TWENTY_DEFAULT_STAGE_VALUES = new Set([
+  'NEW',
+  'SCREENING',
+  'MEETING',
+  'PROPOSAL',
+  'CUSTOMER',
+  'CLOSING',
+]);
+
 @Injectable()
 export class StageSyncService {
   private readonly logger = new Logger(StageSyncService.name);
@@ -27,6 +38,47 @@ export class StageSyncService {
     private readonly secureHttpClientService: SecureHttpClientService,
     private readonly fieldMetadataService: FieldMetadataService,
   ) {}
+
+  // Sincroniza solo si el workspace aún tiene las etapas de ejemplo que Twenty
+  // inserta en instalación nueva. Retorna null si ya fueron personalizadas.
+  async syncOpportunityStagesIfDefaulted(
+    workspaceId: string,
+  ): Promise<SyncStagesResultDTO | null> {
+    const stageField = await this.fieldMetadataService.findOneWithinWorkspace(
+      workspaceId,
+      {
+        where: {
+          name: STAGE_FIELD_NAME,
+          object: { nameSingular: OPPORTUNITY_OBJECT_NAME_SINGULAR },
+        },
+        relations: { object: true },
+      },
+    );
+
+    if (!isDefined(stageField)) {
+      this.logger.warn(
+        `Workspace ${workspaceId}: opportunity "stage" field not found — skipping auto-sync`,
+      );
+      return null;
+    }
+
+    const currentValues: string[] = (stageField.options ?? []).map(
+      (o) => (o as { value: string }).value,
+    );
+
+    const hasOnlyDefaultStages =
+      currentValues.length > 0 &&
+      currentValues.every((v) => TWENTY_DEFAULT_STAGE_VALUES.has(v));
+
+    if (!hasOnlyDefaultStages && currentValues.length > 0) {
+      this.logger.log(
+        `Workspace ${workspaceId}: stages already customized — skipping auto-sync`,
+      );
+      return null;
+    }
+
+    return this.syncOpportunityStages(workspaceId);
+  }
 
   // Sincroniza las opciones del campo "stage" de Opportunity con el catálogo
   // que devuelve el webhook externo. Reemplazo TOTAL (sin merge).

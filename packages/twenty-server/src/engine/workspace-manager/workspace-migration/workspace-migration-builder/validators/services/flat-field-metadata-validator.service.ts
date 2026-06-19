@@ -192,7 +192,8 @@ export class FlatFieldMetadataValidatorService {
 
     if (
       flatFieldMetadataToValidate.isNullable === false &&
-      flatFieldMetadataToValidate.defaultValue === null
+      flatFieldMetadataToValidate.defaultValue === null &&
+      !isMorphOrRelationUniversalFlatFieldMetadata(flatFieldMetadataToValidate)
     ) {
       validationResult.errors.push({
         code: FieldMetadataExceptionCode.INVALID_FIELD_INPUT,
