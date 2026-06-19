@@ -125,7 +125,8 @@ export const ShowPageSummaryCard = ({
   const beautifiedCreatedAt =
     date !== '' ? beautifyPastDateRelativeToNow(date, localeCatalog) : '';
   const exactCreatedAt = date !== '' ? beautifyExactDateTime(date) : '';
-  const dateElementId = `date-id-${uuidV4()}`;
+  const dateElementIdRef = useRef(`date-id-${uuidV4()}`);
+  const dateElementId = dateElementIdRef.current;
   const inputFileRef = useRef<HTMLInputElement>(null);
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isDefined(e.target.files)) onUploadPicture?.(e.target.files[0]);
