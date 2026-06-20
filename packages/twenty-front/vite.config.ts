@@ -3,7 +3,10 @@ import { isNonEmptyString } from '@sniptt/guards';
 import react from '@vitejs/plugin-react-swc';
 import wyw from '@wyw-in-js/vite';
 import fs from 'fs';
+import { createRequire } from 'module';
 import path from 'path';
+
+const require = createRequire(import.meta.url);
 import { visualizer } from 'rollup-plugin-visualizer';
 import {
   defineConfig,
@@ -274,14 +277,12 @@ export default defineConfig(({ mode }) => {
         { find: /^@\//, replacement: path.resolve(__dirname, 'src/modules') + '/' },
         { find: /^~\//, replacement: path.resolve(__dirname, 'src') + '/' },
         { find: 'path', replacement: 'rollup-plugin-node-polyfills/polyfills/path' },
-        // monaco-graphql is a transitive dep hoisted under @graphiql/react — point
-        // Rolldown to the concrete path so ?worker imports resolve correctly.
+        // Rolldown (Vite 8 production bundler) does not walk nested node_modules,
+        // so monaco-graphql must be aliased to its resolved path explicitly.
+        // require.resolve() finds it regardless of where the package manager hoists it.
         {
           find: 'monaco-graphql',
-          replacement: path.resolve(
-            __dirname,
-            '../../node_modules/@graphiql/react/node_modules/monaco-graphql',
-          ),
+          replacement: require.resolve('monaco-graphql'),
         },
       ],
     },
