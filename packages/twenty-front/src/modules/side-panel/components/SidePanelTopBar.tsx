@@ -7,6 +7,7 @@ import { SIDE_PANEL_TOP_BAR_HEIGHT } from '@/side-panel/constants/SidePanelTopBa
 import { SIDE_PANEL_TOP_BAR_HEIGHT_MOBILE } from '@/side-panel/constants/SidePanelTopBarHeightMobile';
 import { SIDE_PANEL_FOCUS_ID } from '@/side-panel/constants/SidePanelFocusId';
 import { useSidePanelContextChips } from '@/side-panel/hooks/useSidePanelContextChips';
+import { useSidePanelMenu } from '@/side-panel/hooks/useSidePanelMenu';
 import { sidePanelNavigationStackState } from '@/side-panel/states/sidePanelNavigationStackState';
 import { sidePanelPageState } from '@/side-panel/states/sidePanelPageState';
 import { sidePanelSearchState } from '@/side-panel/states/sidePanelSearchState';
@@ -103,6 +104,7 @@ export const SidePanelTopBar = () => {
   const { theme } = useContext(ThemeContext);
 
   const { contextChips } = useSidePanelContextChips();
+  const { closeSidePanelMenu } = useSidePanelMenu();
 
   const { pushFocusItemToFocusStack } = usePushFocusItemToFocusStack();
   const { removeFocusItemFromFocusStackById } =
