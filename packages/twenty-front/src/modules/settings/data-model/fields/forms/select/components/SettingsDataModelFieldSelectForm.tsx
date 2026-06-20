@@ -438,7 +438,7 @@ export const SettingsDataModelFieldSelectForm = ({
                   </StyledTextAreaContainer>
                 ) : options.length === 0 ? (
                   <StyledEmptyOptions>
-                    {t`No options yet. Add one below or use "Sync stages".`}
+                    {t`No options yet. Add one below.`}
                   </StyledEmptyOptions>
                 ) : (
                   <>

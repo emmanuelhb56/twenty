@@ -268,6 +268,16 @@ export const SYNC_OPPORTUNITY_STAGES = gql`
   }
 `;
 
+export const SYNC_PERSON_CARGOS = gql`
+  mutation SyncPersonCargos {
+    syncPersonCargos {
+      success
+      message
+      options
+    }
+  }
+`;
+
 export const CREATE_ONE_INDEX_METADATA_ITEM = gql`
   mutation CreateOneIndexMetadataItem($input: CreateOneIndexInput!) {
     createOneIndex(input: $input) {

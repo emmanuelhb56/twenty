@@ -17,6 +17,7 @@ import { isDDLLockedState } from '@/client-config/states/isDDLLockedState';
 import { isObjectMetadataReadOnly } from '@/object-record/read-only/utils/isObjectMetadataReadOnly';
 import { SaveAndCancelButtons } from '@/settings/components/SaveAndCancelButtons/SaveAndCancelButtons';
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
+import { SyncCargosButton } from '@/settings/data-model/fields/components/SyncCargosButton';
 import { SyncStagesButton } from '@/settings/data-model/fields/components/SyncStagesButton';
 import { FIELD_NAME_MAXIMUM_LENGTH } from '@/settings/data-model/constants/FieldNameMaximumLength';
 import { SettingsDataModelFieldDescriptionForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldDescriptionForm';
@@ -391,6 +392,20 @@ export const SettingsObjectFieldEdit = () => {
                     description={t`Replace the stage options with the ones from the external catalog (n8n mock today, ERP later).`}
                   />
                   <SyncStagesButton
+                    fieldMetadataId={fieldMetadataItem.id}
+                    objectMetadataId={objectMetadataItem.id}
+                    disabled={readonly}
+                  />
+                </Section>
+              )}
+            {objectMetadataItem.nameSingular === 'person' &&
+              fieldMetadataItem.name === 'jerarquia' && (
+                <Section>
+                  <H2Title
+                    title={t`Sync cargos`}
+                    description={t`Replace the cargo options with the ones from the external catalog.`}
+                  />
+                  <SyncCargosButton
                     fieldMetadataId={fieldMetadataItem.id}
                     objectMetadataId={objectMetadataItem.id}
                     disabled={readonly}
