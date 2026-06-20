@@ -278,11 +278,11 @@ export default defineConfig(({ mode }) => {
         { find: /^~\//, replacement: path.resolve(__dirname, 'src') + '/' },
         { find: 'path', replacement: 'rollup-plugin-node-polyfills/polyfills/path' },
         // Rolldown (Vite 8 production bundler) does not walk nested node_modules,
-        // so monaco-graphql must be aliased to its resolved path explicitly.
-        // require.resolve() finds it regardless of where the package manager hoists it.
+        // so monaco-graphql must be aliased to its package directory explicitly.
+        // require.resolve('pkg/package.json') gives the directory regardless of hoisting.
         {
           find: 'monaco-graphql',
-          replacement: require.resolve('monaco-graphql'),
+          replacement: path.dirname(require.resolve('monaco-graphql/package.json')),
         },
       ],
     },
