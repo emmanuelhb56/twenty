@@ -191,7 +191,7 @@ export const MultiWorkspaceDropdownDefaultComponents = () => {
           text={
             <>
               {t`Theme `}
-              <StyledDescription>{` · ${colorScheme}`}</StyledDescription>
+              <StyledDescription>{` · ${colorScheme === 'Dark' ? t`Dark` : colorScheme === 'Light' ? t`Light` : t`System`}`}</StyledDescription>
             </>
           }
           hasSubMenu={true}
