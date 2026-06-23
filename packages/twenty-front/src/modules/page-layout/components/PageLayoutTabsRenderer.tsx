@@ -18,24 +18,35 @@ import { getTabsByDisplayMode } from '@/page-layout/utils/getTabsByDisplayMode';
 import { getTabsWithVisibleWidgets } from '@/page-layout/utils/getTabsWithVisibleWidgets';
 import { shouldEnableTabEditingFeatures } from '@/page-layout/utils/shouldEnableTabEditingFeatures';
 import { sortTabsByPosition } from '@/page-layout/utils/sortTabsByPosition';
+import { ResizablePanelEdge } from '@/ui/layout/resizable-panel/components/ResizablePanelEdge';
 import { useLayoutRenderingContext } from '@/ui/layout/contexts/LayoutRenderingContext';
 import { activeTabIdComponentState } from '@/ui/layout/tab-list/states/activeTabIdComponentState';
 import { ScrollWrapper } from '@/ui/utilities/scroll/components/ScrollWrapper';
 import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
 import { useAtomFamilyStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomFamilyStateValue';
 import { styled } from '@linaria/react';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FieldMetadataType } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
 import { useIsMobile } from 'twenty-ui/utilities';
 
+const PAGE_LAYOUT_LEFT_PANEL_CSS_VAR = '--pageLayoutLeftPanelWidth';
+const PAGE_LAYOUT_LEFT_PANEL_MIN_WIDTH = 240;
+const PAGE_LAYOUT_LEFT_PANEL_MAX_WIDTH = 600;
+
 const StyledContainer = styled.div<{ hasPinnedTab: boolean }>`
   display: grid;
   grid-template-columns: ${({ hasPinnedTab }) =>
-    hasPinnedTab ? `${PAGE_LAYOUT_LEFT_PANEL_CONTAINER_WIDTH}px 1fr` : '1fr'};
+    hasPinnedTab
+      ? `var(${PAGE_LAYOUT_LEFT_PANEL_CSS_VAR}, ${PAGE_LAYOUT_LEFT_PANEL_CONTAINER_WIDTH}px) 1fr`
+      : '1fr'};
   grid-template-rows: minmax(0, 1fr);
   height: 100%;
   width: 100%;
+`;
+
+const StyledLeftPanelWrapper = styled.div`
+  position: relative;
 `;
 
 const StyledTabsAndDashboardContainer = styled.div`
@@ -54,6 +65,17 @@ export const PageLayoutTabsRenderer = () => {
 
   const { isInSidePanel, layoutType, targetRecordIdentifier } =
     useLayoutRenderingContext();
+
+  const [leftPanelWidth, setLeftPanelWidth] = useState(
+    PAGE_LAYOUT_LEFT_PANEL_CONTAINER_WIDTH,
+  );
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      PAGE_LAYOUT_LEFT_PANEL_CSS_VAR,
+      `${leftPanelWidth}px`,
+    );
+  }, [leftPanelWidth]);
 
   const isPageLayoutInEditMode = useIsPageLayoutInEditMode();
 
@@ -170,7 +192,23 @@ export const PageLayoutTabsRenderer = () => {
   return (
     <StyledContainer hasPinnedTab={isDefined(pinnedLeftTab)}>
       {isDefined(pinnedLeftTab) && (
-        <PageLayoutLeftPanel pinnedLeftTabId={pinnedLeftTab.id} />
+        <StyledLeftPanelWrapper>
+          <PageLayoutLeftPanel pinnedLeftTabId={pinnedLeftTab.id} />
+          {!isInSidePanel && (
+            <ResizablePanelEdge
+              side="right"
+              constraints={{
+                min: PAGE_LAYOUT_LEFT_PANEL_MIN_WIDTH,
+                max: PAGE_LAYOUT_LEFT_PANEL_MAX_WIDTH,
+                default: PAGE_LAYOUT_LEFT_PANEL_CONTAINER_WIDTH,
+              }}
+              currentWidth={leftPanelWidth}
+              onWidthChange={setLeftPanelWidth}
+              onCollapse={() => setLeftPanelWidth(PAGE_LAYOUT_LEFT_PANEL_MIN_WIDTH)}
+              cssVariableName={PAGE_LAYOUT_LEFT_PANEL_CSS_VAR}
+            />
+          )}
+        </StyledLeftPanelWrapper>
       )}
 
       <StyledTabsAndDashboardContainer>

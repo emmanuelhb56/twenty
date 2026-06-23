@@ -1,8 +1,8 @@
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
-import { format, getYear } from 'date-fns';
-import { useState } from 'react';
+import { format, getYear, parseISO, startOfDay, endOfDay } from 'date-fns';
+import { useState, useMemo } from 'react';
 
 import { CalendarMonthCard } from '@/activities/calendar/components/CalendarMonthCard';
 import { TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE } from '@/activities/calendar/constants/Calendar';
@@ -21,7 +21,6 @@ import {
   AnimatedPlaceholderEmptySubTitle,
   AnimatedPlaceholderEmptyTextContainer,
   AnimatedPlaceholderEmptyTitle,
-  EMPTY_PLACEHOLDER_TRANSITION_PROPS,
 } from 'twenty-ui/feedback';
 import { Section } from 'twenty-ui/layout';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
@@ -50,6 +49,8 @@ const StyledFilterBar = styled.div`
   align-items: center;
   display: flex;
   gap: ${themeCssVariables.spacing[2]};
+  margin-bottom: ${themeCssVariables.spacing[2]};
+  min-width: 0;
 `;
 
 const StyledTodayChip = styled.button`
@@ -60,10 +61,10 @@ const StyledTodayChip = styled.button`
   color: ${themeCssVariables.font.color.secondary};
   cursor: pointer;
   display: flex;
+  flex-shrink: 0;
   font-family: inherit;
   font-size: ${themeCssVariables.font.size.sm};
   font-weight: ${themeCssVariables.font.weight.medium};
-  gap: ${themeCssVariables.spacing[1]};
   height: 24px;
   padding: 0 ${themeCssVariables.spacing[2]};
   white-space: nowrap;
@@ -75,74 +76,64 @@ const StyledTodayChip = styled.button`
   }
 
   &.active {
-    background: ${themeCssVariables.accent.quaternary};
-    border-color: ${themeCssVariables.accent.tertiary};
-    color: ${themeCssVariables.accent.primary};
+    background: ${themeCssVariables.accent.primary};
+    border-color: ${themeCssVariables.accent.primary};
+    color: ${themeCssVariables.font.color.inverted};
   }
 `;
 
 const StyledDateRangeContainer = styled.div`
   align-items: center;
-  background: ${themeCssVariables.background.transparent.light};
+  background: transparent;
   border: 1px solid ${themeCssVariables.border.color.medium};
   border-radius: ${themeCssVariables.border.radius.sm};
   display: flex;
   flex: 1;
-  gap: ${themeCssVariables.spacing[1]};
   height: 24px;
   min-width: 0;
-  padding: 0 ${themeCssVariables.spacing[2]};
+  overflow: hidden;
 
   &:focus-within {
     border-color: ${themeCssVariables.accent.primary};
   }
 `;
 
-const StyledDateLabel = styled.span`
-  color: ${themeCssVariables.font.color.tertiary};
-  flex-shrink: 0;
-  font-size: ${themeCssVariables.font.size.xs};
-  font-weight: ${themeCssVariables.font.weight.medium};
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
+const StyledDateSegment = styled.div`
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: ${themeCssVariables.spacing[1]};
+  min-width: 0;
+  padding: 0 ${themeCssVariables.spacing[2]};
 `;
 
 const StyledDateInput = styled.input`
   background: transparent;
   border: none;
   color: ${themeCssVariables.font.color.primary};
+  flex: 1;
   font-family: inherit;
   font-size: ${themeCssVariables.font.size.sm};
-  min-width: 0;
+  min-width: 90px;
   outline: none;
-  width: 100px;
+  padding: 0;
 
-  &::-webkit-datetime-edit-text {
-    color: ${themeCssVariables.font.color.tertiary};
+  &::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
   }
-  &::-webkit-datetime-edit-month-field,
-  &::-webkit-datetime-edit-day-field,
-  &::-webkit-datetime-edit-year-field {
-    border-radius: 2px;
-    &:focus {
-      background: ${themeCssVariables.accent.quaternary};
-      color: ${themeCssVariables.accent.primary};
-    }
-  }
+
   &::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    opacity: 0.4;
-    &:hover {
-      opacity: 0.8;
-    }
+    display: none;
   }
 `;
 
-const StyledDateDivider = styled.div`
-  background: ${themeCssVariables.border.color.medium};
+const StyledArrowSeparator = styled.div`
+  align-items: center;
+  color: ${themeCssVariables.font.color.light};
+  display: flex;
   flex-shrink: 0;
-  height: 12px;
-  width: 1px;
+  font-size: 10px;
+  padding: 0 2px;
 `;
 
 const StyledClearButton = styled.button`
@@ -154,6 +145,7 @@ const StyledClearButton = styled.button`
   cursor: pointer;
   display: flex;
   flex-shrink: 0;
+  font-size: 10px;
   height: 16px;
   justify-content: center;
   margin-left: auto;
@@ -173,38 +165,7 @@ export const CalendarEventsCard = () => {
 
   const [startDateFilter, setStartDateFilter] = useState('');
   const [endDateFilter, setEndDateFilter] = useState('');
-
-  const todayStr = format(new Date(), 'yyyy-MM-dd');
-  const isTodayActive =
-    startDateFilter === todayStr && endDateFilter === todayStr;
-
-  const handleTodayClick = () => {
-    if (isTodayActive) {
-      setStartDateFilter('');
-      setEndDateFilter('');
-    } else {
-      setStartDateFilter(todayStr);
-      setEndDateFilter(todayStr);
-    }
-  };
-
-  const handleClear = () => {
-    setStartDateFilter('');
-    setEndDateFilter('');
-  };
-
-  const isFiltered = startDateFilter !== '' || endDateFilter !== '';
-
-  const extraVariables = isFiltered
-    ? {
-        startDateFilter: startDateFilter
-          ? new Date(startDateFilter + 'T00:00:00').toISOString()
-          : undefined,
-        endDateFilter: endDateFilter
-          ? new Date(endDateFilter + 'T23:59:59').toISOString()
-          : undefined,
-      }
-    : undefined;
+  const [isTodayActive, setIsTodayActive] = useState(false);
 
   const { data, firstQueryLoading, isFetchingMore, fetchMoreRecords, refetch } =
     useCustomResolver<TimelineCalendarEventsWithTotal>(
@@ -213,7 +174,6 @@ export const CalendarEventsCard = () => {
       'timelineCalendarEvents',
       targetRecord,
       TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE,
-      extraVariables,
     );
 
   useSubscribeTimelineToParticipantChanges({
@@ -227,12 +187,62 @@ export const CalendarEventsCard = () => {
   const { timelineCalendarEvents, totalNumberOfCalendarEvents } =
     data?.getTimelineCalendarEventsFromObjectRecord ?? {};
 
+  const handleTodayClick = () => {
+    if (isTodayActive) {
+      setIsTodayActive(false);
+      setStartDateFilter('');
+      setEndDateFilter('');
+    } else {
+      const today = new Date();
+      const todayStr = format(today, 'yyyy-MM-dd');
+      setIsTodayActive(true);
+      setStartDateFilter(todayStr);
+      setEndDateFilter(todayStr);
+    }
+  };
+
+  const handleStartChange = (value: string) => {
+    setStartDateFilter(value);
+    setIsTodayActive(false);
+  };
+
+  const handleEndChange = (value: string) => {
+    setEndDateFilter(value);
+    setIsTodayActive(false);
+  };
+
+  const handleClear = () => {
+    setStartDateFilter('');
+    setEndDateFilter('');
+    setIsTodayActive(false);
+  };
+
+  const isFiltered = startDateFilter !== '' || endDateFilter !== '';
+
+  const filteredEvents = useMemo(() => {
+    if (!timelineCalendarEvents) return [];
+    if (!isFiltered) return timelineCalendarEvents;
+
+    return timelineCalendarEvents.filter((event) => {
+      const eventDate = new Date(event.startsAt);
+      if (startDateFilter) {
+        const start = startOfDay(parseISO(startDateFilter));
+        if (eventDate < start) return false;
+      }
+      if (endDateFilter) {
+        const end = endOfDay(parseISO(endDateFilter));
+        if (eventDate > end) return false;
+      }
+      return true;
+    });
+  }, [timelineCalendarEvents, startDateFilter, endDateFilter, isFiltered]);
+
   const {
     calendarEventsByDayTime,
     daysByMonthTime,
     monthTimes,
     monthTimesByYear,
-  } = useCalendarEvents(timelineCalendarEvents || []);
+  } = useCalendarEvents(filteredEvents);
 
   const hasMoreCalendarEvents =
     timelineCalendarEvents && totalNumberOfCalendarEvents
@@ -246,6 +256,27 @@ export const CalendarEventsCard = () => {
   };
 
   const objectName = targetRecord.targetObjectNameSingular;
+
+  if (firstQueryLoading) {
+    return <SkeletonLoader />;
+  }
+
+  if (!firstQueryLoading && !timelineCalendarEvents?.length) {
+    // TODO: change animated placeholder
+    return (
+      <AnimatedPlaceholderEmptyContainer>
+        <AnimatedPlaceholder type="noMatchRecord" />
+        <AnimatedPlaceholderEmptyTextContainer>
+          <AnimatedPlaceholderEmptyTitle>
+            {t`No Events`}
+          </AnimatedPlaceholderEmptyTitle>
+          <AnimatedPlaceholderEmptySubTitle>
+            {t`No events have been scheduled with this ${objectName} yet.`}
+          </AnimatedPlaceholderEmptySubTitle>
+        </AnimatedPlaceholderEmptyTextContainer>
+      </AnimatedPlaceholderEmptyContainer>
+    );
+  }
 
   return (
     <CalendarContext.Provider
@@ -262,19 +293,21 @@ export const CalendarEventsCard = () => {
             {t`Today`}
           </StyledTodayChip>
           <StyledDateRangeContainer>
-            <StyledDateLabel>{t`From`}</StyledDateLabel>
-            <StyledDateInput
-              type="date"
-              value={startDateFilter}
-              onChange={(e) => setStartDateFilter(e.target.value)}
-            />
-            <StyledDateDivider />
-            <StyledDateLabel>{t`To`}</StyledDateLabel>
-            <StyledDateInput
-              type="date"
-              value={endDateFilter}
-              onChange={(e) => setEndDateFilter(e.target.value)}
-            />
+            <StyledDateSegment>
+              <StyledDateInput
+                type="date"
+                value={startDateFilter}
+                onChange={(e) => handleStartChange(e.target.value)}
+              />
+            </StyledDateSegment>
+            <StyledArrowSeparator>→</StyledArrowSeparator>
+            <StyledDateSegment>
+              <StyledDateInput
+                type="date"
+                value={endDateFilter}
+                onChange={(e) => handleEndChange(e.target.value)}
+              />
+            </StyledDateSegment>
             {isFiltered && (
               <StyledClearButton onClick={handleClear} title={t`Clear`}>
                 ✕
@@ -282,61 +315,49 @@ export const CalendarEventsCard = () => {
             )}
           </StyledDateRangeContainer>
         </StyledFilterBar>
-
-        {firstQueryLoading ? (
-          <SkeletonLoader />
-        ) : !timelineCalendarEvents?.length ? (
-          <AnimatedPlaceholderEmptyContainer
-            // oxlint-disable-next-line react/jsx-props-no-spreading
-            {...EMPTY_PLACEHOLDER_TRANSITION_PROPS}
-          >
+        {filteredEvents.length === 0 && isFiltered ? (
+          <AnimatedPlaceholderEmptyContainer>
             <AnimatedPlaceholder type="noMatchRecord" />
             <AnimatedPlaceholderEmptyTextContainer>
               <AnimatedPlaceholderEmptyTitle>
                 {t`No Events`}
               </AnimatedPlaceholderEmptyTitle>
               <AnimatedPlaceholderEmptySubTitle>
-                {isFiltered
-                  ? t`No events found for the selected date range.`
-                  : t`No events have been scheduled with this ${objectName} yet.`}
+                {t`No events match the selected date range.`}
               </AnimatedPlaceholderEmptySubTitle>
             </AnimatedPlaceholderEmptyTextContainer>
           </AnimatedPlaceholderEmptyContainer>
         ) : (
-          <>
-            {monthTimes.map((monthTime) => {
-              const monthDayTimes = daysByMonthTime[monthTime] || [];
-              const year = getYear(monthTime);
-              const lastMonthTimeOfYear = monthTimesByYear[year]?.[0];
-              const isLastMonthOfYear = lastMonthTimeOfYear === monthTime;
-              const monthLabel = format(monthTime, 'MMMM', {
-                locale: localeCatalog,
-              });
+          monthTimes.map((monthTime) => {
+            const monthDayTimes = daysByMonthTime[monthTime] || [];
+            const year = getYear(monthTime);
+            const lastMonthTimeOfYear = monthTimesByYear[year]?.[0];
+            const isLastMonthOfYear = lastMonthTimeOfYear === monthTime;
+            const monthLabel = format(monthTime, 'MMMM', {
+              locale: localeCatalog,
+            });
 
-              return (
-                <Section key={monthTime}>
-                  <StyledTitleContainer>
-                    <H3Title
-                      title={
-                        <>
-                          {monthLabel}
-                          {isLastMonthOfYear && (
-                            <StyledYear> {year}</StyledYear>
-                          )}
-                        </>
-                      }
-                    />
-                  </StyledTitleContainer>
-                  <CalendarMonthCard dayTimes={monthDayTimes} />
-                </Section>
-              );
-            })}
-            <CustomResolverFetchMoreLoader
-              loading={isFetchingMore || firstQueryLoading}
-              onLastRowVisible={handleLastRowVisible}
-            />
-          </>
+            return (
+              <Section key={monthTime}>
+                <StyledTitleContainer>
+                  <H3Title
+                    title={
+                      <>
+                        {monthLabel}
+                        {isLastMonthOfYear && <StyledYear> {year}</StyledYear>}
+                      </>
+                    }
+                  />
+                </StyledTitleContainer>
+                <CalendarMonthCard dayTimes={monthDayTimes} />
+              </Section>
+            );
+          })
         )}
+        <CustomResolverFetchMoreLoader
+          loading={isFetchingMore || firstQueryLoading}
+          onLastRowVisible={handleLastRowVisible}
+        />
       </StyledContainer>
     </CalendarContext.Provider>
   );
