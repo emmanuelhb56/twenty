@@ -20,7 +20,6 @@ const StyledSettingsPageContainer = styled.div<{
   gap: ${themeCssVariables.spacing[8]};
   margin: 0 auto;
   max-width: ${SETTINGS_CONTENT_MAX_WIDTH}px;
-  overflow: auto;
   padding: ${themeCssVariables.spacing[6]} ${themeCssVariables.spacing[8]}
     ${themeCssVariables.spacing[8]};
   padding-bottom: ${themeCssVariables.spacing[20]};

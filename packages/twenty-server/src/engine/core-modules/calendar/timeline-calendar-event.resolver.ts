@@ -1,5 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, ArgsType, Field, Int, Query } from '@nestjs/graphql';
+import { IsOptional } from 'class-validator';
 
 import { Max } from 'class-validator';
 import { CoreObjectNameSingular } from 'twenty-shared/types';
@@ -29,6 +30,14 @@ class GetTimelineCalendarEventsFromObjectRecordArgs {
   @Field(() => Int)
   @Max(TIMELINE_CALENDAR_EVENTS_MAX_PAGE_SIZE)
   pageSize: number;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  startDateFilter?: string;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  endDateFilter?: string;
 }
 
 @ArgsType()
@@ -85,6 +94,8 @@ export class TimelineCalendarEventResolver {
       recordId,
       page,
       pageSize,
+      startDateFilter,
+      endDateFilter,
     }: GetTimelineCalendarEventsFromObjectRecordArgs,
     @AuthWorkspaceMemberId() workspaceMemberId: string,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -96,6 +107,8 @@ export class TimelineCalendarEventResolver {
       workspaceId: workspace.id,
       page,
       pageSize,
+      startDateFilter,
+      endDateFilter,
     });
   }
 

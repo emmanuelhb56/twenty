@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import omit from 'lodash.omit';
 import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'twenty-shared/constants';
-import { Any, In, type Repository } from 'typeorm';
+import { Any, Between, In, LessThanOrEqual, MoreThanOrEqual, type Repository } from 'typeorm';
 
 import { CalendarChannelVisibility } from 'twenty-shared/types';
 import { TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE } from 'src/engine/core-modules/calendar/constants/calendar.constants';
@@ -36,12 +36,16 @@ export class TimelineCalendarEventService {
     workspaceId,
     page = 1,
     pageSize = TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE,
+    startDateFilter,
+    endDateFilter,
   }: {
     currentWorkspaceMemberId: string;
     personIds: string[];
     workspaceId: string;
     page: number;
     pageSize: number;
+    startDateFilter?: string;
+    endDateFilter?: string;
   }): Promise<TimelineCalendarEventsWithTotalDTO> {
     const authContext = buildSystemAuthContext(workspaceId);
 
@@ -55,12 +59,24 @@ export class TimelineCalendarEventService {
             'calendarEvent',
           );
 
+        const startsAtWhere =
+          startDateFilter && endDateFilter
+            ? Between(new Date(startDateFilter), new Date(endDateFilter))
+            : startDateFilter
+              ? MoreThanOrEqual(new Date(startDateFilter))
+              : endDateFilter
+                ? LessThanOrEqual(new Date(endDateFilter))
+                : undefined;
+
+        const dateWhere = startsAtWhere ? { startsAt: startsAtWhere } : {};
+
         const totalNumberOfCalendarEvents = await calendarEventRepository.count(
           {
             where: {
               calendarEventParticipants: {
                 personId: Any(personIds),
               },
+              ...dateWhere,
             },
           },
         );
@@ -70,6 +86,7 @@ export class TimelineCalendarEventService {
             calendarEventParticipants: {
               personId: Any(personIds),
             },
+            ...dateWhere,
           },
           select: {
             id: true,
@@ -268,6 +285,8 @@ export class TimelineCalendarEventService {
     workspaceId,
     page = 1,
     pageSize = TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE,
+    startDateFilter,
+    endDateFilter,
   }: {
     currentWorkspaceMemberId: string;
     objectNameSingular: string;
@@ -275,6 +294,8 @@ export class TimelineCalendarEventService {
     workspaceId: string;
     page: number;
     pageSize: number;
+    startDateFilter?: string;
+    endDateFilter?: string;
   }): Promise<TimelineCalendarEventsWithTotalDTO> {
     const personIds = await this.relatedPersonIdsService.getRelatedPersonIds({
       workspaceId,
@@ -296,6 +317,8 @@ export class TimelineCalendarEventService {
       workspaceId,
       page,
       pageSize,
+      startDateFilter,
+      endDateFilter,
     });
   }
 }

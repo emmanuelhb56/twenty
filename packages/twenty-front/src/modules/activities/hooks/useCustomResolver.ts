@@ -4,7 +4,7 @@ import {
   type TypedDocumentNode,
 } from '@apollo/client';
 import { useQuery } from '@apollo/client/react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { type ActivityTargetableObject } from '@/activities/types/ActivityTargetableEntity';
 import { useSnackBarOnQueryError } from '@/apollo/hooks/useSnackBarOnQueryError';
@@ -30,6 +30,7 @@ export const useCustomResolver = <
   objectName: string,
   activityTargetableObject: ActivityTargetableObject,
   pageSize: number,
+  extraVariables?: Record<string, unknown>,
 ): {
   data: CustomResolverQueryResult<T> | undefined;
   firstQueryLoading: boolean;
@@ -46,11 +47,21 @@ export const useCustomResolver = <
 
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
+  const extraVariablesKey = JSON.stringify(extraVariables ?? {});
+  const prevExtraVariablesKey = useRef(extraVariablesKey);
+  useEffect(() => {
+    if (prevExtraVariablesKey.current !== extraVariablesKey) {
+      prevExtraVariablesKey.current = extraVariablesKey;
+      setPage({ pageNumber: 1, hasNextPage: true });
+    }
+  }, [extraVariablesKey]);
+
   const queryVariables = {
     objectNameSingular: activityTargetableObject.targetObjectNameSingular,
     recordId: activityTargetableObject.id,
     page: 1,
     pageSize,
+    ...(extraVariables ?? {}),
   };
 
   const { data, loading, fetchMore, refetch, error } = useQuery<
