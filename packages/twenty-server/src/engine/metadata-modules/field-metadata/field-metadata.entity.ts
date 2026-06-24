@@ -157,6 +157,9 @@ export class FieldMetadataEntity<
   @Column({ default: false })
   isLabelSyncedWithName: boolean;
 
+  @Column({ default: false })
+  isRequired: boolean;
+
   @Column({ nullable: true, type: 'uuid' })
   relationTargetFieldMetadataId: AssignTypeIfIsMorphOrRelationFieldMetadataType<
     string,
