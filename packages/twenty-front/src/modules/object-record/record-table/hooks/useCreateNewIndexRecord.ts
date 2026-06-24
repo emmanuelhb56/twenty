@@ -4,19 +4,25 @@ import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/Enriche
 import { getLabelIdentifierFieldMetadataItem } from '@/object-metadata/utils/getLabelIdentifierFieldMetadataItem';
 import { useBuildRecordInputFromRLSPredicates } from '@/object-record/hooks/useBuildRecordInputFromRLSPredicates';
 import { useCreateOneRecord } from '@/object-record/hooks/useCreateOneRecord';
+import { validateRequiredFields } from '@/object-record/hooks/useRequiredFieldsValidation';
 import { recordGroupDefinitionsComponentSelector } from '@/object-record/record-group/states/selectors/recordGroupDefinitionsComponentSelector';
 import { recordIndexGroupFieldMetadataItemComponentState } from '@/object-record/record-index/states/recordIndexGroupFieldMetadataComponentState';
 import { recordIndexOpenRecordInState } from '@/object-record/record-index/states/recordIndexOpenRecordInState';
 import { recordIndexRecordIdsByGroupComponentFamilyState } from '@/object-record/record-index/states/recordIndexRecordIdsByGroupComponentFamilyState';
+import { REQUIRED_FIELDS_MODAL_ID } from '@/object-record/record-index/constants/RequiredFieldsModalId';
+import { requiredFieldsPendingCreationState } from '@/object-record/record-index/states/requiredFieldsPendingCreationState';
 import { useUpsertRecordsInStore } from '@/object-record/record-store/hooks/useUpsertRecordsInStore';
 import { useBuildRecordInputFromFilters } from '@/object-record/record-table/hooks/useBuildRecordInputFromFilters';
 import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
 import { canOpenObjectInSidePanel } from '@/object-record/utils/canOpenObjectInSidePanel';
+import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
+import { useModal } from '@/ui/layout/modal/hooks/useModal';
 import { useAtomComponentFamilyStateCallbackState } from '@/ui/utilities/state/jotai/hooks/useAtomComponentFamilyStateCallbackState';
 import { useAtomComponentSelectorValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentSelectorValue';
 import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
 import { ViewOpenRecordIn } from '~/generated-metadata/graphql';
-import { useStore } from 'jotai';
+import { t } from '@lingui/core/macro';
+import { useSetAtom, useStore } from 'jotai';
 import { useCallback } from 'react';
 import { AppPath } from 'twenty-shared/types';
 import { findByProperty, isDefined } from 'twenty-shared/utils';
@@ -72,6 +78,12 @@ export const useCreateNewIndexRecord = ({
       objectMetadataItem,
     });
 
+  const { enqueueWarningSnackBar } = useSnackBar();
+  const { openModal } = useModal();
+  const setRequiredFieldsPendingCreation = useSetAtom(
+    requiredFieldsPendingCreationState,
+  );
+
   const createNewIndexRecord = useCallback(
     async (recordInput?: Partial<ObjectRecord>) => {
       const recordId = v4();
@@ -87,6 +99,61 @@ export const useCreateNewIndexRecord = ({
       const recordIndexOpenRecordIn = store.get(
         recordIndexOpenRecordInState.atom,
       );
+
+      const { missingFields, isValid } = validateRequiredFields({
+        objectMetadataItem,
+        recordInput: mergedRecordInput,
+      });
+
+      if (!isValid) {
+        enqueueWarningSnackBar({
+          message: t`Required fields are missing: ${missingFields.map((f) => f.label).join(', ')}`,
+        });
+        setRequiredFieldsPendingCreation({
+          missingFields,
+          createRecord: async () => {
+            const createdRecord = await createOneRecord({
+              id: recordId,
+              ...mergedRecordInput,
+            });
+
+            if (
+              recordIndexOpenRecordIn === ViewOpenRecordIn.SIDE_PANEL &&
+              canOpenObjectInSidePanel(objectMetadataItem.nameSingular)
+            ) {
+              openRecordInSidePanel({
+                recordId,
+                objectNameSingular: objectMetadataItem.nameSingular,
+                isNewRecord: true,
+              });
+            } else {
+              const labelIdentifierFieldMetadataItem =
+                getLabelIdentifierFieldMetadataItem(objectMetadataItem);
+              closeSidePanelMenu();
+              navigate(
+                AppPath.RecordShowPage,
+                {
+                  objectNameSingular: objectMetadataItem.nameSingular,
+                  objectRecordId: recordId,
+                },
+                undefined,
+                {
+                  state: {
+                    isNewRecord: true,
+                    objectRecordId: recordId,
+                    labelIdentifierFieldName:
+                      labelIdentifierFieldMetadataItem?.name,
+                  },
+                },
+              );
+            }
+
+            upsertRecordsInStore({ partialRecords: [createdRecord] });
+          },
+        });
+        openModal(REQUIRED_FIELDS_MODAL_ID);
+        return;
+      }
 
       const createdRecord = await createOneRecord({
         id: recordId,
@@ -172,6 +239,9 @@ export const useCreateNewIndexRecord = ({
       recordIndexRecordIdsByGroupCallbackState,
       upsertRecordsInStore,
       closeSidePanelMenu,
+      setRequiredFieldsPendingCreation,
+      enqueueWarningSnackBar,
+      openModal,
     ],
   );
 
