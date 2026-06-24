@@ -52,7 +52,8 @@ const booleanFieldFormSchema = z
 
 const currencyFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.CURRENCY) })
-  .extend(settingsDataModelFieldCurrencyFormSchema.shape);
+  .extend(settingsDataModelFieldCurrencyFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const dateFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.DATE) })

@@ -1,6 +1,7 @@
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
 import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
 import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
+import { FieldMetadataType } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
 
 const isEmpty = (value: unknown): boolean => {
@@ -21,9 +22,17 @@ export const validateRequiredFields = ({
   objectMetadataItem: EnrichedObjectMetadataItem;
   recordInput: Partial<ObjectRecord>;
 }) => {
+  const EXCLUDED_TYPES = [
+    FieldMetadataType.RELATION,
+    FieldMetadataType.MORPH_RELATION,
+    FieldMetadataType.BOOLEAN,
+  ];
+
   const missingFields = objectMetadataItem.fields.filter(
     (field: FieldMetadataItem) =>
-      field.isRequired === true && isEmpty(recordInput[field.name]),
+      field.isRequired === true &&
+      !EXCLUDED_TYPES.includes(field.type) &&
+      isEmpty(recordInput[field.name]),
   );
 
   return {
