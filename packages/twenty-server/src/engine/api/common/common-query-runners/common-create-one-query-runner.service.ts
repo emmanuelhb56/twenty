@@ -14,6 +14,7 @@ import {
   CreateOneQueryArgs,
 } from 'src/engine/api/common/types/common-query-args.type';
 import { assertIsValidUuid } from 'src/engine/api/graphql/workspace-query-runner/utils/assert-is-valid-uuid.util';
+import { assertRequiredFieldsPresent } from 'src/engine/api/common/common-query-runners/utils/assert-required-fields-present.util';
 import { WorkspaceAuthContext } from 'src/engine/core-modules/auth/types/workspace-auth-context.type';
 import { FlatEntityMaps } from 'src/engine/metadata-modules/flat-entity/types/flat-entity-maps.type';
 import { FlatFieldMetadata } from 'src/engine/metadata-modules/flat-field-metadata/types/flat-field-metadata.type';
@@ -94,12 +95,20 @@ export class CommonCreateOneQueryRunnerService extends CommonBaseQueryRunnerServ
     args: CommonInput<CreateOneQueryArgs>,
     queryRunnerContext: CommonBaseQueryRunnerContext,
   ): Promise<void> {
-    const { flatObjectMetadata } = queryRunnerContext;
+    const { flatObjectMetadata, flatFieldMetadataMaps } = queryRunnerContext;
 
     assertMutationNotOnRemoteObject(flatObjectMetadata);
 
     if (args.data?.id) {
       assertIsValidUuid(args.data.id);
+    }
+
+    if (!args.upsert) {
+      assertRequiredFieldsPresent(
+        [args.data],
+        flatObjectMetadata,
+        flatFieldMetadataMaps,
+      );
     }
   }
 }

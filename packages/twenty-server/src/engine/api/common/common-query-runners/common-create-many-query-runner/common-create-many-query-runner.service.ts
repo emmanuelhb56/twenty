@@ -29,6 +29,7 @@ import { CommonSelectedFieldsResult } from 'src/engine/api/common/types/common-s
 import { buildColumnsToReturn } from 'src/engine/api/graphql/graphql-query-runner/utils/build-columns-to-return';
 import { buildColumnsToSelect } from 'src/engine/api/graphql/graphql-query-runner/utils/build-columns-to-select';
 import { assertIsValidUuid } from 'src/engine/api/graphql/workspace-query-runner/utils/assert-is-valid-uuid.util';
+import { assertRequiredFieldsPresent } from 'src/engine/api/common/common-query-runners/utils/assert-required-fields-present.util';
 import { getAllSelectableColumnNames } from 'src/engine/api/utils/get-all-selectable-column-names.utils';
 import { WorkspaceAuthContext } from 'src/engine/core-modules/auth/types/workspace-auth-context.type';
 import { RecordPositionService } from 'src/engine/core-modules/record-position/services/record-position.service';
@@ -177,7 +178,7 @@ export class CommonCreateManyQueryRunnerService extends CommonBaseQueryRunnerSer
     args: CommonInput<CreateManyQueryArgs>,
     queryRunnerContext: CommonBaseQueryRunnerContext,
   ): Promise<void> {
-    const { flatObjectMetadata } = queryRunnerContext;
+    const { flatObjectMetadata, flatFieldMetadataMaps } = queryRunnerContext;
 
     assertMutationNotOnRemoteObject(flatObjectMetadata);
 
@@ -186,6 +187,14 @@ export class CommonCreateManyQueryRunnerService extends CommonBaseQueryRunnerSer
         assertIsValidUuid(record.id);
       }
     });
+
+    if (!args.upsert) {
+      assertRequiredFieldsPresent(
+        args.data,
+        flatObjectMetadata,
+        flatFieldMetadataMaps,
+      );
+    }
   }
 
   private async insertOrUpsertRecords({
