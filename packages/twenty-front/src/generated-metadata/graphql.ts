@@ -1734,6 +1734,7 @@ export type Field = {
   /** @deprecated Use isUIEditable */
   isUIReadOnly?: Maybe<Scalars['Boolean']['output']>;
   isUnique?: Maybe<Scalars['Boolean']['output']>;
+  isRequired?: Maybe<Scalars['Boolean']['output']>;
   label: Scalars['String']['output'];
   morphId?: Maybe<Scalars['UUID']['output']>;
   morphRelations?: Maybe<Array<Relation>>;
@@ -5295,6 +5296,7 @@ export type UpdateFieldInput = {
   isActive?: InputMaybe<Scalars['Boolean']['input']>;
   isLabelSyncedWithName?: InputMaybe<Scalars['Boolean']['input']>;
   isNullable?: InputMaybe<Scalars['Boolean']['input']>;
+  isRequired?: InputMaybe<Scalars['Boolean']['input']>;
   isSystem?: InputMaybe<Scalars['Boolean']['input']>;
   isUIEditable?: InputMaybe<Scalars['Boolean']['input']>;
   isUIReadOnly?: InputMaybe<Scalars['Boolean']['input']>;

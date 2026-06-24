@@ -38,6 +38,7 @@ export const CREATE_ONE_OBJECT_METADATA_ITEM = gql`
         isSystem
         isUIEditable
         isNullable
+        isRequired
         isUnique
         createdAt
         updatedAt
@@ -106,6 +107,7 @@ export const CREATE_ONE_FIELD_METADATA_ITEM = gql`
       isActive
       isUnique
       isNullable
+      isRequired
       createdAt
       updatedAt
       settings
@@ -177,6 +179,7 @@ export const UPDATE_ONE_FIELD_METADATA_ITEM = gql`
       isActive
       isUnique
       isNullable
+      isRequired
       createdAt
       updatedAt
       settings
