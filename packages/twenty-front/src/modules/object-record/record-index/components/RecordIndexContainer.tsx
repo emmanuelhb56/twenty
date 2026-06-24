@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react';
 
 import { RecordBoardContainer } from '@/object-record/record-board/components/RecordBoardContainer';
+import { RequiredFieldsModal } from '@/object-record/record-index/components/RequiredFieldsModal';
 import { RecordIndexTableContainer } from '@/object-record/record-index/components/RecordIndexTableContainer';
 import { recordIndexViewTypeState } from '@/object-record/record-index/states/recordIndexViewTypeState';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
@@ -39,7 +40,9 @@ export const RecordIndexContainer = () => {
     useHasCurrentViewNonReadableFields(objectMetadataItem);
 
   return (
-    <StyledContainer>
+    <>
+      <RequiredFieldsModal />
+      <StyledContainer>
       {hasCurrentViewNonReadableFields ? (
         <RecordIndexEmptyStateNotShared
           nonReadableViewFieldInfo={nonReadableViewFieldInfo}
@@ -70,5 +73,6 @@ export const RecordIndexContainer = () => {
         </>
       )}
     </StyledContainer>
+    </>
   );
 };
