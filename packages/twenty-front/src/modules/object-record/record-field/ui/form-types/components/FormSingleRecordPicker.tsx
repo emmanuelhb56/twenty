@@ -78,6 +78,7 @@ export type FormSingleRecordPickerProps = {
   testId?: string;
   VariablePicker?: VariablePickerComponent;
   shouldDisplayRecordFieldsInVariablePicker?: boolean;
+  required?: boolean;
 };
 
 export const FormSingleRecordPicker = ({
@@ -93,6 +94,7 @@ export const FormSingleRecordPicker = ({
   testId,
   VariablePicker,
   shouldDisplayRecordFieldsInVariablePicker = false,
+  required,
 }: FormSingleRecordPickerProps) => {
   const { theme } = useContext(ThemeContext);
 
@@ -197,7 +199,7 @@ export const FormSingleRecordPicker = ({
 
   return (
     <FormFieldInputContainer data-testid={testId}>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
       <FormFieldInputRowContainer>
         {disabled ? (
           <StyledFormSelectContainerWrapper readonly>

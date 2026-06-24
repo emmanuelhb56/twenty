@@ -17,6 +17,7 @@ type FormCurrencyFieldInputProps = {
   onChange: (value: FormFieldCurrencyValue) => void;
   VariablePicker?: VariablePickerComponent;
   readonly?: boolean;
+  required?: boolean;
 };
 
 export const FormCurrencyFieldInput = ({
@@ -25,6 +26,7 @@ export const FormCurrencyFieldInput = ({
   onChange,
   VariablePicker,
   readonly,
+  required,
 }: FormCurrencyFieldInputProps) => {
   const currencies = useMemo(() => {
     return [
@@ -55,7 +57,7 @@ export const FormCurrencyFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
       <FormNestedFieldInputContainer>
         <FormSelectFieldInput
           label={t`Currency Code`}

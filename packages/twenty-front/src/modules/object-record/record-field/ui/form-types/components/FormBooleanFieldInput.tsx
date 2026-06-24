@@ -20,6 +20,7 @@ type FormBooleanFieldInputProps = {
   onChange: (value: boolean | null | string) => void;
   VariablePicker?: VariablePickerComponent;
   readonly?: boolean;
+  required?: boolean;
 };
 
 const parseStringifiedBooleanToBoolean = (value: string) => {
@@ -44,6 +45,7 @@ export const FormBooleanFieldInput = ({
   onChange,
   readonly,
   VariablePicker,
+  required,
 }: FormBooleanFieldInputProps) => {
   const { t } = useLingui();
   const { theme } = useContext(ThemeContext);
@@ -117,7 +119,7 @@ export const FormBooleanFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer>
         {draftValue.type === 'static' ? (

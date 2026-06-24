@@ -71,6 +71,7 @@ type FormFieldInputProps = {
   error?: string;
   onError?: (error: string | undefined) => void;
   timeZone?: string;
+  required?: boolean;
 };
 
 export const FormFieldInput = ({
@@ -84,6 +85,7 @@ export const FormFieldInput = ({
   error,
   onError,
   timeZone,
+  required,
 }: FormFieldInputProps) => {
   return isFieldNumber(field) || field.type === FieldMetadataType.NUMERIC ? (
     <FormNumberFieldInput
@@ -95,6 +97,7 @@ export const FormFieldInput = ({
       placeholder={placeholder}
       error={error}
       onError={onError}
+      required={required}
     />
   ) : isFieldBoolean(field) ? (
     <FormBooleanFieldInput
@@ -103,6 +106,7 @@ export const FormFieldInput = ({
       onChange={onChange}
       VariablePicker={VariablePicker}
       readonly={readonly}
+      required={required}
     />
   ) : isFieldText(field) ? (
     <FormTextFieldInput
@@ -112,6 +116,7 @@ export const FormFieldInput = ({
       VariablePicker={VariablePicker}
       readonly={readonly}
       placeholder={placeholder}
+      required={required}
     />
   ) : isFieldSelect(field) ? (
     <FormSelectFieldInput
@@ -122,6 +127,7 @@ export const FormFieldInput = ({
       options={field.metadata?.options}
       readonly={readonly}
       isNullable={field.metadata.isNullable}
+      required={required}
     />
   ) : isFieldFullName(field) ? (
     <FormFullNameFieldInput
@@ -130,6 +136,7 @@ export const FormFieldInput = ({
       onChange={onChange}
       VariablePicker={VariablePicker}
       readonly={readonly}
+      required={required}
     />
   ) : isFieldAddress(field) ? (
     <FormAddressFieldInput
@@ -138,6 +145,7 @@ export const FormFieldInput = ({
       onChange={onChange}
       VariablePicker={VariablePicker}
       readonly={readonly}
+      required={required}
     />
   ) : isFieldLinks(field) ? (
     <FormLinksFieldInput
@@ -146,6 +154,7 @@ export const FormFieldInput = ({
       onChange={onChange}
       VariablePicker={VariablePicker}
       readonly={readonly}
+      required={required}
     />
   ) : isFieldEmails(field) ? (
     <FormEmailsFieldInput
@@ -154,6 +163,7 @@ export const FormFieldInput = ({
       onChange={onChange}
       VariablePicker={VariablePicker}
       readonly={readonly}
+      required={required}
     />
   ) : isFieldFiles(field) ? (
     <FormFilesFieldInput
@@ -163,6 +173,7 @@ export const FormFieldInput = ({
       VariablePicker={VariablePicker}
       readonly={readonly}
       placeholder={placeholder}
+      required={required}
     />
   ) : isFieldPhones(field) ? (
     <FormPhoneFieldInput
@@ -171,6 +182,7 @@ export const FormFieldInput = ({
       onChange={onChange}
       VariablePicker={VariablePicker}
       readonly={readonly}
+      required={required}
     />
   ) : isFieldDate(field) ? (
     <FormDateFieldInput
@@ -180,6 +192,7 @@ export const FormFieldInput = ({
       VariablePicker={VariablePicker}
       readonly={readonly}
       placeholder={placeholder}
+      required={required}
     />
   ) : isFieldDateTime(field) ? (
     <FormDateTimeFieldInput
@@ -189,6 +202,7 @@ export const FormFieldInput = ({
       VariablePicker={VariablePicker}
       readonly={readonly}
       timeZone={timeZone}
+      required={required}
     />
   ) : isFieldMultiSelect(field) ? (
     <FormMultiSelectFieldInput
@@ -199,6 +213,7 @@ export const FormFieldInput = ({
       options={field.metadata?.options}
       readonly={readonly}
       placeholder={placeholder}
+      required={required}
     />
   ) : isFieldRawJson(field) ? (
     <FormRawJsonFieldInput
@@ -208,6 +223,7 @@ export const FormFieldInput = ({
       VariablePicker={VariablePicker}
       readonly={readonly}
       placeholder={placeholder}
+      required={required}
     />
   ) : isFieldUuid(field) ? (
     <FormUuidFieldInput
@@ -217,6 +233,7 @@ export const FormFieldInput = ({
       VariablePicker={VariablePicker}
       readonly={readonly}
       placeholder={placeholder}
+      required={required}
     />
   ) : isFieldCurrency(field) ? (
     <FormCurrencyFieldInput
@@ -225,6 +242,7 @@ export const FormFieldInput = ({
       onChange={onChange}
       VariablePicker={VariablePicker}
       readonly={readonly}
+      required={required}
     />
   ) : isFieldRichText(field) ? (
     <FormRichTextFieldInput
@@ -256,6 +274,7 @@ export const FormFieldInput = ({
       onChange={onChange}
       VariablePicker={VariablePicker}
       readonly={readonly}
+      required={required}
     />
   ) : isFieldArray(field) ? (
     <FormArrayFieldInput
@@ -265,6 +284,7 @@ export const FormFieldInput = ({
       VariablePicker={VariablePicker}
       readonly={readonly}
       placeholder={placeholder}
+      required={required}
     />
   ) : null;
 };

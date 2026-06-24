@@ -22,6 +22,7 @@ type FormTextFieldInputProps = {
   readonly?: boolean;
   placeholder?: string;
   VariablePicker?: VariablePickerComponent;
+  required?: boolean;
 };
 
 export const FormTextFieldInput = ({
@@ -35,6 +36,7 @@ export const FormTextFieldInput = ({
   multiline,
   readonly,
   VariablePicker,
+  required,
 }: FormTextFieldInputProps) => {
   const instanceId = useId();
 
@@ -67,7 +69,7 @@ export const FormTextFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer multiline={multiline}>
         <FormFieldInputInnerContainer

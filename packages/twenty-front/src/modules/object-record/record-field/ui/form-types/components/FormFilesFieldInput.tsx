@@ -20,6 +20,7 @@ type FormFilesFieldInputProps = {
   readonly?: boolean;
   VariablePicker?: VariablePickerComponent;
   placeholder?: string;
+  required?: boolean;
 };
 
 export const FormFilesFieldInput = ({
@@ -31,6 +32,7 @@ export const FormFilesFieldInput = ({
   onBlur,
   readonly,
   VariablePicker,
+  required,
 }: FormFilesFieldInputProps) => {
   const instanceId = useId();
 
@@ -75,7 +77,7 @@ export const FormFilesFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer multiline>
         <FormFieldInputInnerContainer

@@ -1,6 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { Separator } from '@/settings/components/Separator';
 import { SettingsDataModelPreviewFormCard } from '@/settings/data-model/components/SettingsDataModelPreviewFormCard';
+import { SettingsDataModelFieldIsRequiredForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsRequiredForm';
 import { SettingsDataModelFieldIsUniqueForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsUniqueForm';
 import { SettingsDataModelFieldNumberForm } from '@/settings/data-model/fields/forms/number/components/SettingsDataModelFieldNumberForm';
 import { SettingsDataModelFieldPreviewWidget } from '@/settings/data-model/fields/preview/components/SettingsDataModelFieldPreviewWidget';
@@ -44,6 +45,12 @@ export const SettingsDataModelFieldNumberSettingsFormCard = ({
             fieldType={FieldMetadataType.NUMBER}
             existingFieldMetadataId={existingFieldMetadataId}
             objectNameSingular={objectNameSingular}
+            disabled={disabled}
+          />
+          <Separator />
+          <SettingsDataModelFieldIsRequiredForm
+            fieldType={FieldMetadataType.NUMBER}
+            existingFieldMetadataId={existingFieldMetadataId}
             disabled={disabled}
           />
         </>

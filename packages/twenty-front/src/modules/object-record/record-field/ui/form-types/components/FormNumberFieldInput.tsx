@@ -27,6 +27,7 @@ type FormNumberFieldInputProps = {
   placeholder?: string;
   error?: string;
   onError?: (error: string | undefined) => void;
+  required?: boolean;
 };
 
 type FormNumberFieldInputValue =
@@ -50,6 +51,7 @@ export const FormNumberFieldInput = ({
   hint,
   readonly,
   error: errorFromProps,
+  required,
 }: FormNumberFieldInputProps) => {
   const instanceId = useId();
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
@@ -99,7 +101,7 @@ export const FormNumberFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel htmlFor={instanceId}>{label}</InputLabel> : null}
+      {label ? <InputLabel htmlFor={instanceId} required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer>
         <FormFieldInputInnerContainer

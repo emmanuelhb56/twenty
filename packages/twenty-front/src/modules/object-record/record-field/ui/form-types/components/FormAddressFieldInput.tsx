@@ -15,6 +15,7 @@ type FormAddressFieldInputProps = {
   onChange: (value: FieldAddressValue) => void;
   VariablePicker?: VariablePickerComponent;
   readonly?: boolean;
+  required?: boolean;
 };
 
 export const FormAddressFieldInput = ({
@@ -23,6 +24,7 @@ export const FormAddressFieldInput = ({
   onChange,
   readonly,
   VariablePicker,
+  required,
 }: FormAddressFieldInputProps) => {
   const handleChange =
     (field: keyof FieldAddressDraftValue) => (updatedAddressPart: string) => {
@@ -42,7 +44,7 @@ export const FormAddressFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
       <FormNestedFieldInputContainer>
         <FormTextFieldInput
           label={t`Address 1`}

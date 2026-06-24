@@ -17,6 +17,7 @@ type FormUuidFieldInputProps = {
   readonly?: boolean;
   VariablePicker?: VariablePickerComponent;
   placeholder?: string;
+  required?: boolean;
 };
 
 export const FormUuidFieldInput = ({
@@ -26,6 +27,7 @@ export const FormUuidFieldInput = ({
   onChange,
   readonly,
   VariablePicker,
+  required,
 }: FormUuidFieldInputProps) => {
   const instanceId = useId();
 
@@ -87,7 +89,7 @@ export const FormUuidFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel htmlFor={instanceId}>{label}</InputLabel> : null}
+      {label ? <InputLabel htmlFor={instanceId} required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer>
         <FormFieldInputInnerContainer

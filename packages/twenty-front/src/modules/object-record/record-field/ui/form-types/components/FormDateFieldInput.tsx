@@ -77,6 +77,7 @@ type FormDateFieldInputProps = {
   placeholder?: string;
   VariablePicker?: VariablePickerComponent;
   readonly?: boolean;
+  required?: boolean;
 };
 
 export const FormDateFieldInput = ({
@@ -85,6 +86,7 @@ export const FormDateFieldInput = ({
   onChange,
   VariablePicker,
   readonly,
+  required,
 }: FormDateFieldInputProps) => {
   const instanceId = useId();
 
@@ -264,7 +266,7 @@ export const FormDateFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer>
         <StyledDatePickerInputWrapper ref={datePickerWrapperRef}>

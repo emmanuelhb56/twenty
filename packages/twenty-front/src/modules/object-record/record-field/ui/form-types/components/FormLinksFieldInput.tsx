@@ -14,6 +14,7 @@ type FormLinksFieldInputProps = {
   VariablePicker?: VariablePickerComponent;
   readonly?: boolean;
   placeholder?: string;
+  required?: boolean;
 };
 
 export const FormLinksFieldInput = ({
@@ -23,6 +24,7 @@ export const FormLinksFieldInput = ({
   readonly,
   VariablePicker,
   placeholder,
+  required,
 }: FormLinksFieldInputProps) => {
   const handleChange =
     (field: keyof FieldLinksDraftValue) => (updatedLinksPart: string) => {
@@ -37,7 +39,7 @@ export const FormLinksFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
       <FormNestedFieldInputContainer>
         <FormTextFieldInput
           label={t`Primary Link Label`}

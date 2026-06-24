@@ -1,6 +1,7 @@
 import { Separator } from '@/settings/components/Separator';
 import { SettingsDataModelPreviewFormCard } from '@/settings/data-model/components/SettingsDataModelPreviewFormCard';
 
+import { SettingsDataModelFieldIsRequiredForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsRequiredForm';
 import { SettingsDataModelFieldIsUniqueForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsUniqueForm';
 import { SettingsDataModelFieldTextForm } from '@/settings/data-model/fields/forms/components/text/SettingsDataModelFieldTextForm';
 import { SettingsDataModelFieldPreviewWidget } from '@/settings/data-model/fields/preview/components/SettingsDataModelFieldPreviewWidget';
@@ -44,6 +45,12 @@ export const SettingsDataModelFieldTextSettingsFormCard = ({
             fieldType={FieldMetadataType.TEXT}
             existingFieldMetadataId={existingFieldMetadataId}
             objectNameSingular={objectNameSingular}
+            disabled={disabled}
+          />
+          <Separator />
+          <SettingsDataModelFieldIsRequiredForm
+            fieldType={FieldMetadataType.TEXT}
+            existingFieldMetadataId={existingFieldMetadataId}
             disabled={disabled}
           />
         </>

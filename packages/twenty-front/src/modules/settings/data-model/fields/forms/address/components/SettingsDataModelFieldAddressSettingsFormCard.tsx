@@ -1,8 +1,10 @@
+import { Separator } from '@/settings/components/Separator';
 import { SettingsDataModelPreviewFormCard } from '@/settings/data-model/components/SettingsDataModelPreviewFormCard';
 import {
   SettingsDataModelFieldAddressForm,
   type SettingsDataModelFieldTextFormValues,
 } from '@/settings/data-model/fields/forms/address/components/SettingsDataModelFieldAddressForm';
+import { SettingsDataModelFieldIsRequiredForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsRequiredForm';
 import { SettingsDataModelFieldPreviewWidget } from '@/settings/data-model/fields/preview/components/SettingsDataModelFieldPreviewWidget';
 import { useFormContext } from 'react-hook-form';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
@@ -38,10 +40,18 @@ export const SettingsDataModelFieldAddressSettingsFormCard = ({
         />
       }
       form={
-        <SettingsDataModelFieldAddressForm
-          disabled={disabled}
-          existingFieldMetadataId={existingFieldMetadataId}
-        />
+        <>
+          <SettingsDataModelFieldAddressForm
+            disabled={disabled}
+            existingFieldMetadataId={existingFieldMetadataId}
+          />
+          <Separator />
+          <SettingsDataModelFieldIsRequiredForm
+            fieldType={FieldMetadataType.ADDRESS}
+            existingFieldMetadataId={existingFieldMetadataId}
+            disabled={disabled}
+          />
+        </>
       }
     />
   );

@@ -62,6 +62,7 @@ export type FormMultiRecordPickerProps = {
   readonly?: boolean;
   testId?: string;
   VariablePicker?: VariablePickerComponent;
+  required?: boolean;
 };
 
 export const FormMultiRecordPicker = ({
@@ -72,6 +73,7 @@ export const FormMultiRecordPicker = ({
   readonly,
   testId,
   VariablePicker,
+  required,
 }: FormMultiRecordPickerProps) => {
   const { theme } = useContext(ThemeContext);
 
@@ -188,7 +190,7 @@ export const FormMultiRecordPicker = ({
 
   return (
     <FormFieldInputContainer data-testid={testId}>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
       <FormFieldInputRowContainer>
         {readonly || draftValue.type === 'variable' ? (
           <StyledFormSelectContainerWrapper readonly={readonly}>

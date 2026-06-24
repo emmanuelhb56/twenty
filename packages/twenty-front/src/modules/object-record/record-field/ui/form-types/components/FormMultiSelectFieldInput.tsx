@@ -38,6 +38,7 @@ type FormMultiSelectFieldInputProps = {
   testId?: string;
   hint?: string;
   dropdownWidth?: number;
+  required?: boolean;
 };
 
 const StyledDisplayModeReadonlyContainer = styled.div`
@@ -90,6 +91,7 @@ export const FormMultiSelectFieldInput = ({
   testId,
   hint,
   dropdownWidth,
+  required,
 }: FormMultiSelectFieldInputProps) => {
   const { theme } = useContext(ThemeContext);
   const instanceId = useId();
@@ -209,7 +211,7 @@ export const FormMultiSelectFieldInput = ({
 
   return (
     <FormFieldInputContainer data-testid={testId}>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer>
         <FormFieldInputInnerContainer

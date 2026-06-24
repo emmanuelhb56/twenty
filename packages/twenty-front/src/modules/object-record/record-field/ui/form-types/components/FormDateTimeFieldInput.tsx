@@ -72,6 +72,7 @@ type FormDateTimeFieldInputProps = {
   VariablePicker?: VariablePickerComponent;
   readonly?: boolean;
   timeZone?: string;
+  required?: boolean;
 };
 
 export const FormDateTimeFieldInput = ({
@@ -81,6 +82,7 @@ export const FormDateTimeFieldInput = ({
   VariablePicker,
   readonly,
   timeZone,
+  required,
 }: FormDateTimeFieldInputProps) => {
   const instanceId = useId();
 
@@ -259,7 +261,7 @@ export const FormDateTimeFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer>
         <StyledDatePickerInputWrapper ref={datePickerWrapperRef}>

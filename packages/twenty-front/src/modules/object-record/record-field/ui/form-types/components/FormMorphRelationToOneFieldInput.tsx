@@ -50,6 +50,7 @@ type FormMorphRelationToOneFieldInputProps = {
   readonly?: boolean;
   testId?: string;
   VariablePicker?: VariablePickerComponent;
+  required?: boolean;
 };
 
 export const FormMorphRelationToOneFieldInput = ({
@@ -61,6 +62,7 @@ export const FormMorphRelationToOneFieldInput = ({
   readonly,
   testId,
   VariablePicker,
+  required,
 }: FormMorphRelationToOneFieldInputProps) => {
   const { objectMetadataItems } = useObjectMetadataItems();
   const { objectPermissionsByObjectMetadataId } = useObjectPermissions();
@@ -115,7 +117,7 @@ export const FormMorphRelationToOneFieldInput = ({
   if (hasForbiddenSelectedRecord) {
     return (
       <FormFieldInputContainer data-testid={testId}>
-        {label ? <InputLabel>{label}</InputLabel> : null}
+        {label ? <InputLabel required={required}>{label}</InputLabel> : null}
         <FormFieldInputRowContainer>
           <StyledReadonlyContainer>
             <FormFieldInputInnerContainer
@@ -135,7 +137,7 @@ export const FormMorphRelationToOneFieldInput = ({
   if (readableObjectNameSingulars.length === 0) {
     return (
       <FormFieldInputContainer data-testid={testId}>
-        {label ? <InputLabel>{label}</InputLabel> : null}
+        {label ? <InputLabel required={required}>{label}</InputLabel> : null}
         <FormFieldInputRowContainer>
           <StyledReadonlyContainer>
             <FormFieldInputInnerContainer

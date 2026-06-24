@@ -40,6 +40,7 @@ type FormArrayFieldInputProps = {
   readonly?: boolean;
   placeholder?: string;
   testId?: string;
+  required?: boolean;
 };
 
 const StyledDisplayModeReadonlyContainer = styled.div`
@@ -90,6 +91,7 @@ export const FormArrayFieldInput = ({
   readonly,
   placeholder,
   testId,
+  required,
 }: FormArrayFieldInputProps) => {
   const { t } = useLingui();
   const { theme } = useContext(ThemeContext);
@@ -296,7 +298,7 @@ export const FormArrayFieldInput = ({
 
   return (
     <FormFieldInputContainer data-testid={testId}>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer>
         <FormFieldInputInnerContainer

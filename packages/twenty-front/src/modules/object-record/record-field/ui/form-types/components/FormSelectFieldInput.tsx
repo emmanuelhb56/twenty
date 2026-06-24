@@ -29,6 +29,7 @@ type FormSelectFieldInputProps = {
   readonly?: boolean;
   isNullable?: boolean;
   callToActionButton?: CallToActionButton;
+  required?: boolean;
 };
 
 export const FormSelectFieldInput = ({
@@ -41,6 +42,7 @@ export const FormSelectFieldInput = ({
   readonly,
   isNullable,
   callToActionButton,
+  required,
 }: FormSelectFieldInputProps) => {
   const { theme } = useContext(ThemeContext);
   const instanceId = useId();
@@ -138,7 +140,7 @@ export const FormSelectFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
 
       <FormFieldInputRowContainer>
         {draftValue.type === 'static' ? (

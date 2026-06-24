@@ -14,6 +14,7 @@ type FormFullNameFieldInputProps = {
   onChange: (value: FieldFullNameValue) => void;
   VariablePicker?: VariablePickerComponent;
   readonly?: boolean;
+  required?: boolean;
 };
 
 export const FormFullNameFieldInput = ({
@@ -22,6 +23,7 @@ export const FormFullNameFieldInput = ({
   onChange,
   readonly,
   VariablePicker,
+  required,
 }: FormFullNameFieldInputProps) => {
   const handleFirstNameChange = (newText: string) => {
     onChange({
@@ -39,7 +41,7 @@ export const FormFullNameFieldInput = ({
 
   return (
     <FormFieldInputContainer>
-      {label ? <InputLabel>{label}</InputLabel> : null}
+      {label ? <InputLabel required={required}>{label}</InputLabel> : null}
       <FormNestedFieldInputContainer>
         <FormTextFieldInput
           label={t`First Name`}
