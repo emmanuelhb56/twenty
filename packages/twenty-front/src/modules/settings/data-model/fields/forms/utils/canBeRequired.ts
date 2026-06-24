@@ -5,5 +5,6 @@ export const canBeRequired = (field: Pick<FieldMetadataItem, 'type'>) => {
   return ![
     FieldMetadataType.RELATION,
     FieldMetadataType.MORPH_RELATION,
+    FieldMetadataType.BOOLEAN,
   ].includes(field.type);
 };

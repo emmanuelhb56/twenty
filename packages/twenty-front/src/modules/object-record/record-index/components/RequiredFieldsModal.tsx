@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai';
+import { useAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useAtomComponentState';
 import { useLingui } from '@lingui/react/macro';
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
@@ -35,7 +35,7 @@ const StyledButtonContainer = styled.div`
 export const RequiredFieldsModal = () => {
   const { t } = useLingui();
   const { closeModal } = useModal();
-  const [pendingCreation, setPendingCreation] = useAtom(
+  const [pendingCreation, setPendingCreation] = useAtomComponentState(
     requiredFieldsPendingCreationState,
   );
 
@@ -47,8 +47,11 @@ export const RequiredFieldsModal = () => {
   const handleCreate = async () => {
     if (!isDefined(pendingCreation)) return;
     closeModal(REQUIRED_FIELDS_MODAL_ID);
-    await pendingCreation.createRecord();
-    setPendingCreation(null);
+    try {
+      await pendingCreation.createRecord();
+    } finally {
+      setPendingCreation(null);
+    }
   };
 
   return (

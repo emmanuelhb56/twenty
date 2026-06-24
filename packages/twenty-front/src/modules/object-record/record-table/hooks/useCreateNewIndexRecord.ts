@@ -22,7 +22,8 @@ import { useAtomComponentSelectorValue } from '@/ui/utilities/state/jotai/hooks/
 import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
 import { ViewOpenRecordIn } from '~/generated-metadata/graphql';
 import { t } from '@lingui/core/macro';
-import { useSetAtom, useStore } from 'jotai';
+import { useStore } from 'jotai';
+import { useSetAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useSetAtomComponentState';
 import { useCallback } from 'react';
 import { AppPath } from 'twenty-shared/types';
 import { findByProperty, isDefined } from 'twenty-shared/utils';
@@ -80,8 +81,9 @@ export const useCreateNewIndexRecord = ({
 
   const { enqueueWarningSnackBar } = useSnackBar();
   const { openModal } = useModal();
-  const setRequiredFieldsPendingCreation = useSetAtom(
+  const setRequiredFieldsPendingCreation = useSetAtomComponentState(
     requiredFieldsPendingCreationState,
+    instanceId,
   );
 
   const createNewIndexRecord = useCallback(
