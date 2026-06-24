@@ -7,6 +7,7 @@ import { settingsDataModelFieldAddressFormSchema } from '@/settings/data-model/f
 import { SettingsDataModelFieldAddressSettingsFormCard } from '@/settings/data-model/fields/forms/address/components/SettingsDataModelFieldAddressSettingsFormCard';
 import { settingsDataModelFieldBooleanFormSchema } from '@/settings/data-model/fields/forms/boolean/components/SettingsDataModelFieldBooleanForm';
 import { SettingsDataModelFieldBooleanSettingsFormCard } from '@/settings/data-model/fields/forms/boolean/components/SettingsDataModelFieldBooleanSettingsFormCard';
+import { SettingsDataModelFieldIsRequiredForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsRequiredForm';
 import { SettingsDataModelFieldIsUniqueForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsUniqueForm';
 import { SettingsDataModelFieldMaxValuesForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldMaxValuesForm';
 import { settingsDataModelFieldTextFormSchema } from '@/settings/data-model/fields/forms/components/text/SettingsDataModelFieldTextForm';
@@ -41,6 +42,10 @@ const isUniqueFieldFormSchema = z.object({
   isUnique: z.boolean().nullable().default(false),
 });
 
+const isRequiredFieldFormSchema = z.object({
+  isRequired: z.boolean().nullable().default(false),
+});
+
 const booleanFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.BOOLEAN) })
   .extend(settingsDataModelFieldBooleanFormSchema.shape);
@@ -52,12 +57,14 @@ const currencyFieldFormSchema = z
 const dateFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.DATE) })
   .extend(settingsDataModelFieldDateFormSchema.shape)
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const dateTimeFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.DATE_TIME) })
   .extend(settingsDataModelFieldDateFormSchema.shape)
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const relationFieldFormSchema = z
   .object({
@@ -73,30 +80,36 @@ const morphRelationFieldFormSchema = z
 
 const selectFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.SELECT) })
-  .extend(settingsDataModelFieldSelectFormSchema.shape);
+  .extend(settingsDataModelFieldSelectFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const multiSelectFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.MULTI_SELECT) })
-  .extend(settingsDataModelFieldMultiSelectFormSchema.shape);
+  .extend(settingsDataModelFieldMultiSelectFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const numberFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.NUMBER) })
   .extend(settingsDataModelFieldNumberFormSchema.shape)
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const textFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.TEXT) })
   .extend(settingsDataModelFieldTextFormSchema.shape)
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const addressFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.ADDRESS) })
-  .extend(settingsDataModelFieldAddressFormSchema.shape);
+  .extend(settingsDataModelFieldAddressFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const phonesFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.PHONES) })
   .extend(settingsDataModelFieldPhonesFormSchema.shape)
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const emailsFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.EMAILS) })
@@ -106,7 +119,8 @@ const emailsFieldFormSchema = z
       settingsDataModelFieldOnClickActionSchema,
     ),
   )
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const linksFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.LINKS) })
@@ -116,16 +130,19 @@ const linksFieldFormSchema = z
       settingsDataModelFieldOnClickActionSchema,
     ),
   )
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const arrayFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.ARRAY) })
   .merge(mergeSettingsSchemas(settingsDataModelFieldMaxValuesSchema))
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 const filesFieldFormSchema = z
   .object({ type: z.literal(FieldMetadataType.FILES) })
-  .merge(mergeSettingsSchemas(settingsDataModelFieldMaxValuesSchema));
+  .merge(mergeSettingsSchemas(settingsDataModelFieldMaxValuesSchema))
+  .extend(isRequiredFieldFormSchema.shape);
 
 const otherFieldsFormSchema = z
   .object({
@@ -152,7 +169,8 @@ const otherFieldsFormSchema = z
       ) as [FieldMetadataType, ...FieldMetadataType[]],
     ),
   })
-  .extend(isUniqueFieldFormSchema.shape);
+  .extend(isUniqueFieldFormSchema.shape)
+  .extend(isRequiredFieldFormSchema.shape);
 
 export const settingsDataModelFieldSettingsFormSchema = z.discriminatedUnion(
   'type',
@@ -372,6 +390,11 @@ export const SettingsDataModelFieldSettingsFormCard = ({
             fieldType={fieldType}
             existingFieldMetadataId={existingFieldMetadataId}
             objectNameSingular={objectNameSingular}
+            disabled={disabled}
+          />
+          <SettingsDataModelFieldIsRequiredForm
+            fieldType={fieldType}
+            existingFieldMetadataId={existingFieldMetadataId}
             disabled={disabled}
           />
         </>
