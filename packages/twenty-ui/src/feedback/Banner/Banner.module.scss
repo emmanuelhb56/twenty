@@ -37,3 +37,15 @@
   background: var(--t-background-transparent-danger);
   color: var(--t-color-red);
 }
+
+.primaryAmber {
+  backdrop-filter: blur(5px);
+  background: #92400e;
+  color: #fef3c7;
+}
+
+.secondaryAmber {
+  backdrop-filter: none;
+  background: #fffbeb;
+  color: #92400e;
+}

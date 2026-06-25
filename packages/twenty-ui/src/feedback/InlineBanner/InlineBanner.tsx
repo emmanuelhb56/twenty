@@ -42,7 +42,7 @@ export const InlineBanner = ({
         <Button
           size="small"
           variant="secondary"
-          accent={color}
+          accent={color === 'amber' ? 'default' : color}
           title={button?.title}
           onClick={button?.onClick}
         />

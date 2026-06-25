@@ -15,6 +15,7 @@ import { themeCssVariables } from 'twenty-ui/theme-constants';
 const StyledText = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const StyledInvertedIconButton = styled(IconButton)`
@@ -25,19 +26,32 @@ const StyledContent = styled.div<{ hasCloseButton: boolean }>`
   align-items: center;
   display: flex;
   flex: 1;
-  gap: ${themeCssVariables.spacing[3]};
+  gap: ${themeCssVariables.spacing[2]};
   justify-content: center;
   margin-left: ${({ hasCloseButton }) => (hasCloseButton ? '24px' : '0')};
 `;
 
+const StyledMessageIcon = styled.span`
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  opacity: 0.85;
+`;
+
 const StyledAmberButton = styled.span`
+  flex-shrink: 0;
   button {
-    background-color: #d97706 !important;
-    border-color: transparent !important;
-    color: #ffffff !important;
+    background-color: rgba(146, 64, 14, 0.15) !important;
+    border-color: rgba(146, 64, 14, 0.3) !important;
+    color: #92400e !important;
+    font-weight: 600 !important;
+  }
+  button svg {
+    color: #92400e !important;
+    stroke: currentColor !important;
   }
   button:hover:not(:disabled) {
-    background-color: #b45309 !important;
+    background-color: rgba(146, 64, 14, 0.25) !important;
   }
 `;
 
@@ -45,6 +59,7 @@ export const InformationBanner = ({
   message,
   color = 'blue',
   variant = 'primary',
+  messageIcon: MessageIcon,
   buttonTitle,
   buttonIcon,
   buttonOnClick,
@@ -55,6 +70,7 @@ export const InformationBanner = ({
   message: string;
   color?: BannerColor;
   variant?: BannerVariant;
+  messageIcon?: IconComponent;
   buttonTitle?: string;
   buttonIcon?: IconComponent;
   buttonOnClick?: () => void;
@@ -80,6 +96,11 @@ export const InformationBanner = ({
       {informationBannerIsOpen && (
         <Banner color={color} variant={variant}>
           <StyledContent hasCloseButton={!!onClose}>
+            {MessageIcon && (
+              <StyledMessageIcon>
+                <MessageIcon size={16} />
+              </StyledMessageIcon>
+            )}
             <StyledText>{message}</StyledText>
             {buttonTitle && buttonOnClick && (
               isAmber ? (
