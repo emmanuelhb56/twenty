@@ -31,7 +31,5 @@ export const useWorkflowNodeLabel = (
 
   return data.nodeType === 'trigger'
     ? t`Trigger`
-    : data.nodeType === 'action'
-      ? t`Action`
-      : capitalize(data.nodeType);
+    : t`Action`;
 };

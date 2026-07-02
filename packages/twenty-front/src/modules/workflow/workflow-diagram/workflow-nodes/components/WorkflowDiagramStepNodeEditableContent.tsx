@@ -56,9 +56,7 @@ export const WorkflowDiagramStepNodeEditableContent = ({
   const nodeTypeLabel =
     data.nodeType === 'trigger'
       ? t`Trigger`
-      : data.nodeType === 'action'
-        ? t`Action`
-        : capitalize(data.nodeType);
+      : t`Action`;
 
   const [isHovered, setIsHovered] = useState(false);
 
