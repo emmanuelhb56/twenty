@@ -43,6 +43,12 @@ const StyledContainer = styled.div<{ hasPinnedTab: boolean }>`
   grid-template-rows: minmax(0, 1fr);
   height: 100%;
   width: 100%;
+
+  @media print {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
 `;
 
 const StyledLeftPanelWrapper = styled.div`
@@ -53,11 +59,29 @@ const StyledTabsAndDashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  @media print {
+    display: block;
+    overflow: visible;
+
+    .page-layout-tab-list-print-hidden {
+      display: none;
+    }
+  }
 `;
 
 const StyledScrollWrapperContainer = styled.div`
   flex: 1;
   min-height: 0;
+
+  @media print {
+    min-height: auto;
+
+    .page-layout-scroll-wrapper {
+      height: auto;
+      overflow: visible;
+    }
+  }
 `;
 
 export const PageLayoutTabsRenderer = () => {
@@ -222,6 +246,7 @@ export const PageLayoutTabsRenderer = () => {
         />
         {(sortedActiveTabs.length > 1 || isPageLayoutInEditMode) && (
           <PageLayoutTabList
+            className="page-layout-tab-list-print-hidden"
             tabs={sortedActiveTabs}
             behaveAsLinks={!isInSidePanel && !isPageLayoutInEditMode}
             isInSidePanel={isInSidePanel}
@@ -244,6 +269,7 @@ export const PageLayoutTabsRenderer = () => {
 
         <StyledScrollWrapperContainer>
           <ScrollWrapper
+            className="page-layout-scroll-wrapper"
             componentInstanceId={getScrollWrapperInstanceIdFromPageLayoutId(
               currentPageLayout.id,
             )}
