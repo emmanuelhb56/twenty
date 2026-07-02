@@ -7,6 +7,7 @@ export const FLAT_FIELD_METADATA_EDITABLE_PROPERTIES = {
     'icon',
     'isActive',
     'isLabelSyncedWithName',
+    'isRequired',
     'isUnique',
     'label',
     'name',
